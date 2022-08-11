@@ -7,7 +7,10 @@ CONSTANTS:
     FPS: int, Frame per second in game.
 """
 
-WIDTH = 430
-HEIGHT = 700
+WIDTH = 396
+HEIGHT = 643
+TILESIZE = 30
+OFFSET_WIDTH = 11
+OFFSET_HEIGHT = 62
 FPS = 60
 BACKGROUND_PATH = '../graphics/background.jpg'
