@@ -1,3 +1,5 @@
+from operator import pos
+from turtle import position
 from settings import MAP
 import pygame
 
@@ -20,19 +22,9 @@ class Board:
         self.color_id = 0   
 
     def update(self):
-        for tile in self.active_tiles:
-            position = tile.position
-            if position[1] < 0:
-                tile.update()
-                continue
-            if position[1] == 18 or self.positions[position[1]+1][position[0]] == 2:
-                self._add_figure_status()
-                self.tiles += self.active_tiles
-                self.active_tiles = []
-                self.add_figure('I')
-                break
+        self._check_next_tile_move()
+        self._move_active_tiles()
             
-            tile.update()
 
     def draw(self):
         for tile in (self.tiles + self.active_tiles):
@@ -48,14 +40,27 @@ class Board:
             self.active_tiles.append(Tile([4, -2], color))
             self.active_tiles.append(Tile([4, -3], color))
             self.active_tiles.append(Tile([4, -4], color))
+        elif type == 'J':
+            self.active_tiles.append(Tile([4, -1], color))
+            self.active_tiles.append(Tile([5, -1], color))
+            self.active_tiles.append(Tile([5, -2], color))
+            self.active_tiles.append(Tile([5, -3], color))
+            self.active_tiles.append(Tile([5, -4], color))
             
     def _add_figure_status(self):
         for tile in self.active_tiles:
             position = tile.position
             self.positions[position[1]][position[0]] = 2
-                    
-    def _print(self):
-        for i in range(len(self.positions)):
-            for j in range(len(self.positions[i])):
-                if self.positions[i][j] == 2:
-                    print(self.positions[i][j], " = ", i, " ", j)
+            
+    def _check_next_tile_move(self):
+        for tile in self.active_tiles:
+            position = tile.position
+            if position[1] == 18 or self.positions[position[1]+1][position[0]] == 2:
+                self._add_figure_status()
+                self.tiles += self.active_tiles
+                self.active_tiles = []
+                self.add_figure('J')
+                break
+    def _move_active_tiles(self):
+        for tile in self.active_tiles:
+            tile.update()
