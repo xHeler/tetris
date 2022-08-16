@@ -32,4 +32,5 @@ class Delay:
         now = pygame.time.get_ticks()
         if now - self.last >= self.cooldown:
             self.last = now
-            print(f"Printed after {self.cooldown}ms")
+            return True
+        return False

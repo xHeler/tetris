@@ -25,7 +25,7 @@ class Tile(pygame.sprite.Sprite):
         rect: Rect, Rectangle layer of image object, setup with specific offset
             and position.
     """
-    def __init__(self, groups, position, color):
+    def __init__(self, position, color):
         """ Tile constructor
 
         Load all possible tiles color to dictionary, then chose specific color
@@ -39,17 +39,41 @@ class Tile(pygame.sprite.Sprite):
                 Example:
                     color = 'green'
         """
-        super().__init__(groups)
+        super().__init__()
 
          # Get specific image from dictionary by color
         colors = get_graphics_dictionary('../graphics/tiles')
         self.image = colors[color]
+        
+        self.position = position
+        self.topleft = [OFFSET_WIDTH + position[0] * TILESIZE,
+                        OFFSET_HEIGHT + position[1] * TILESIZE]
 
         # Rescale image and set position
         self.image = pygame.transform.scale(self.image, (TILESIZE, TILESIZE))
-        self.rect = self.image.get_rect(
-            topleft = (OFFSET_WIDTH + position[0] * TILESIZE,
-                       OFFSET_HEIGHT + position[1] * TILESIZE))
+        self.rect = self.image.get_rect(topleft = self.topleft)
+        
+        # visible
+        self.visible = False
+        
+        # stop
+        self.stop = False
+
+    def update(self):
+        """Move tile one level down.
+        """
+        self._move()
+    
+    def draw(self, display_surface):
+        if self.visible:
+            display_surface.blit(self.image, self.rect.topleft)
+            
+    def _move(self):
+        self.position[1] += 1
+        self.topleft[1] += TILESIZE        
+        self.rect.topleft = self.topleft
+        if self.position[1] == 0:
+            self.visible = True
 
 
 def get_graphics_dictionary(path):
