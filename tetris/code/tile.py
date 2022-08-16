@@ -25,7 +25,7 @@ class Tile(pygame.sprite.Sprite):
         rect: Rect, Rectangle layer of image object, setup with specific offset
             and position.
     """
-    def __init__(self, position, color):
+    def __init__(self, position, color, visible=False):
         """ Tile constructor
 
         Load all possible tiles color to dictionary, then chose specific color
@@ -54,7 +54,7 @@ class Tile(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft = self.topleft)
         
         # visible
-        self.visible = False
+        self.visible = visible
         
         # stop
         self.stop = False

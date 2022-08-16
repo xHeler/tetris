@@ -33,11 +33,11 @@ class Level:
         self.background_surface = pygame.transform.scale(self.background_surface, (WIDTH, HEIGHT))
         self.background_rectangle = self.background_surface.get_rect(topleft=(0, 0))
 
-        self.delay = Delay(100)
+        self.delay = Delay(10)
 
         #! Create testing tile by specific color
         self.board = Board()
-        self.board.add_figure('I')
+        self.board.add_random_figure()
 
 
     def update(self):
@@ -49,6 +49,9 @@ class Level:
                                   self.background_rectangle.topleft)
         
         #! test moving
+        if self.board.game_over:
+            self.board = Board()
+            self.board.fill()
         if self.delay.is_cooldown_left():
             self.board.update()
         self.board.draw()
