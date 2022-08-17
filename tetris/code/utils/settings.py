@@ -14,7 +14,8 @@ OFFSET_WIDTH = 11
 OFFSET_HEIGHT = 62
 FPS = 60
 BACKGROUND_PATH = '../graphics/background.jpg'
-SHAPES_PATH = '../utils/shapes'
+SHAPES_PATH = '../shapes'
+COLORS = ['brown', 'gold', 'green', 'orange', 'yellow']
 MAP = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
        [0, 0, 0, 0, 0, 0, 0, 0, 0],
        [0, 0, 0, 0, 0, 0, 0, 0, 0],

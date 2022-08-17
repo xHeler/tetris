@@ -17,8 +17,8 @@ Todo:
 import sys
 import pygame
 
-from settings import WIDTH, HEIGHT, FPS
-from level import Level
+from utils.settings import WIDTH, HEIGHT, FPS
+from level.level import Level
 
 
 class Game:

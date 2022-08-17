@@ -1,9 +1,11 @@
 from turtle import position
-from settings import MAP, SHAPES_PATH
+from figure.color import Color
+from utils.settings import MAP, SHAPES_PATH
 import pygame
 
-from tile import Tile
-from shape import Shape
+from figure.tile import Tile
+from figure.shape import Shape
+
 
 
 class Board:
@@ -18,15 +20,14 @@ class Board:
         self.tiles = []
         self.active_tiles = [] # actual moving figure
         
-        # color id
-        self.color_id = 0   
-        self.colors = ['brown', 'gold', 'green', 'orange', 'yellow']
-        
         # game over
         self.game_over = False
         
         # shape
         self.shape = Shape(SHAPES_PATH)
+        
+        # color
+        self.color = Color()
         
     def update(self):
         if not self.game_over:
@@ -38,23 +39,10 @@ class Board:
             tile.draw(self.display_surface)
 
     def add_random_figure(self):
-        color = self._get_next_color()
+        color = self.color.get_color()
         positions = self.shape.get_random_shape()
         for position in positions:
             self.active_tiles.append(Tile(position, color))
-
-    def add_figure_by_index(self, index):
-        color = self._get_next_color()
-        shape_positions = self.shape.get_shape_by_index(index)
-        for position in shape_positions:
-            tile = Tile(position, color)
-            self.active_tiles.append(tile)
-    
-    def fill(self):
-        for i in range(len(self.positions)):
-            for j in range(len(self.positions[0])):
-                color = self._get_next_color()
-                self.tiles.append(Tile([j, i], color, True))
             
     def _add_figure_status(self):
         for tile in self.active_tiles:
@@ -86,9 +74,3 @@ class Board:
             return True
         else:
             return False    
-    
-    def _get_next_color(self):
-        color = self.colors[self.color_id]
-        self.color_id += 1
-        self.color_id = self.color_id % int(len(self.colors))
-        return color

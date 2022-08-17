@@ -13,7 +13,7 @@ from os import walk
 
 import pygame
 
-from settings import TILESIZE, OFFSET_WIDTH, OFFSET_HEIGHT
+from utils.settings import TILESIZE, OFFSET_WIDTH, OFFSET_HEIGHT
 
 
 
@@ -62,13 +62,13 @@ class Tile(pygame.sprite.Sprite):
     def update(self):
         """Move tile one level down.
         """
-        self._move()
+        self._move_down_one_position()
     
     def draw(self, display_surface):
         if self.visible:
             display_surface.blit(self.image, self.rect.topleft)
             
-    def _move(self):
+    def _move_down_one_position(self):
         self.position[1] += 1
         self.topleft[1] += TILESIZE        
         self.rect.topleft = self.topleft

@@ -6,9 +6,9 @@ Drawing objects and updates their positions in game loop.
 
 import pygame
 
-from settings import HEIGHT, WIDTH, BACKGROUND_PATH
-from board import Board
-from delay import Delay
+from utils.settings import HEIGHT, WIDTH, BACKGROUND_PATH
+from level.board import Board
+from utils.delay import Delay
 
 
 class Level:
@@ -51,7 +51,6 @@ class Level:
         #! test moving
         if self.board.game_over:
             self.board = Board()
-            self.board.fill()
         if self.delay.is_cooldown_left():
             self.board.update()
         self.board.draw()
