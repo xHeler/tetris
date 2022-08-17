@@ -37,7 +37,6 @@ class Level:
 
         #! Create testing tile by specific color
         self.board = Board()
-        self.board.add_random_figure()
 
 
     def update(self):

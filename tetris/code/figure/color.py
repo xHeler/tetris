@@ -3,11 +3,13 @@ from utils.settings import COLORS
 
 
 class Color:
+    color_id = 0  
+    
     def __init__(self):
-        self.color_id = 0   
         self.colors = COLORS
         
     def get_color(self):
-        index = self.color_id % len(self.colors)
-        self.color_id += 1
+        index = Color.color_id % len(self.colors)
+        print('index:', index)
+        Color.color_id += 1
         return self.colors[index]
