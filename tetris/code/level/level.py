@@ -50,6 +50,7 @@ class Level:
         #! test moving
         if self.board.game_over:
             self.board = Board()
+            print("Game Over")
         if self.delay.is_cooldown_left():
             self.board.update()
         self.board.draw()

@@ -10,6 +10,5 @@ class Color:
         
     def get_color(self):
         index = Color.color_id % len(self.colors)
-        print('index:', index)
         Color.color_id += 1
         return self.colors[index]
