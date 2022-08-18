@@ -6,7 +6,7 @@ Drawing objects and updates their positions in game loop.
 
 import pygame
 
-from utils.settings import HEIGHT, WIDTH, BACKGROUND_PATH
+from utils.settings import HEIGHT, WIDTH, BACKGROUND_PATH, COOLDOWN
 from level.board import Board
 from utils.delay import Delay
 from characters.player import Player
@@ -34,7 +34,7 @@ class Level:
         self.background_surface = pygame.transform.scale(self.background_surface, (WIDTH, HEIGHT))
         self.background_rectangle = self.background_surface.get_rect(topleft=(0, 0))
 
-        self.delay = Delay(200)
+        self.delay = Delay(COOLDOWN)
 
         #= create game board
         self.board = Board()
@@ -52,7 +52,7 @@ class Level:
         
         # player moves
         self.player.update()
-        
+        self.change_speed()
         if self.board.game_over:
             self.board = Board()
             print("Game Over")
@@ -60,3 +60,8 @@ class Level:
             self.board.update(self.player.direction)
         self.board.draw()
 
+    def change_speed(self):
+        if self.player.direction == -1:
+            self.delay.cooldown = 0
+        else:
+            self.delay.cooldown = COOLDOWN
