@@ -69,16 +69,12 @@ class Board:
             if self._is_figure_exist_in_board(position):
                 return
             if self._is_figure_should_stop(position):
-                if self._is_game_over(position):
-                    self.game_over = True
-                    self.figures = []
-                    return
                 self._add_figure_status()
                 self.figures.append(self.figure)
                 self.figure = Figure(self.display_surface)
                 return
             
-    def _is_game_over(self, position):
+    def is_game_over(self):
         for item in self.positions[0]:
             if item == 1:
                 return True

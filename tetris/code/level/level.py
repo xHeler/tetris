@@ -10,6 +10,7 @@ from utils.settings import HEIGHT, WIDTH, BACKGROUND_PATH, COOLDOWN
 from level.board import Board
 from utils.delay import Delay
 from characters.player import Player
+from utils.scoreboard import Scoreboard
 
 
 class Level:
@@ -41,6 +42,8 @@ class Level:
         
         # create player
         self.player = Player()
+        
+        self.scoreboard = Scoreboard()
 
     def update(self):
         """ Updating postin and drawing objects.
@@ -53,7 +56,8 @@ class Level:
         # player moves
         self.player.update()
         self.change_speed()
-        if self.board.game_over:
+        
+        if self.board.is_game_over():
             print("Game Over. Score: ", self.player.score)
             self.board = Board()
             self.player = Player()
@@ -62,9 +66,9 @@ class Level:
             multiplier = self.board.clear_and_move_rows()
             if multiplier > 0:
                 self.player.add_score(multiplier)
-                print("Score: ", self.player.score)
             self.board.update(self.player)
         self.board.draw()
+        self.scoreboard.draw(self.player.score)
 
     def change_speed(self):
         if self.player.direction == -1:
