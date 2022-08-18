@@ -44,6 +44,15 @@ class Figure:
             list.append(tile.position)
         return list
     
+    def remove_tiles_at_postions(self, positions):
+        for position in positions:
+            self.remove_tile_at_position(position)
+    
+    def remove_tile_at_position(self, position):
+        for tile in self.tiles:
+            if tile.position == position:
+                self.tiles.remove(tile)
+    
     def _build_figure(self):
         color = self.color.get_color()
         positions = self.shape.get_random_shape()
@@ -61,3 +70,8 @@ class Figure:
             if position[0] == 0:
                 return False
         return True
+    
+    def one_tile_figure(self, position):
+        color = self.color.get_color()
+        self.tiles = []
+        self.tiles.append(Tile(position, color, True))

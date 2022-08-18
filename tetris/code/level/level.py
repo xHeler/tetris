@@ -41,7 +41,7 @@ class Level:
         
         # create player
         self.player = Player()
-
+        self.board.fill_last_row()
 
     def update(self):
         """ Updating postin and drawing objects.

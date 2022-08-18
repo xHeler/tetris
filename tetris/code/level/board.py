@@ -29,6 +29,10 @@ class Board:
 
         
     def update(self, direction):
+        if self._is_last_row_full():
+            self._remove_last_row_tiles()
+            print("Czyszcze")
+            return
         if not self.game_over:
             self._check_next_figure_move()
             self.figure.move_figure(direction)
@@ -69,3 +73,26 @@ class Board:
     
     def _is_figure_should_stop(self, position):
         return position[1] == 18 or self.positions[position[1]+1][position[0]] == 1
+    
+    def _is_last_row_full(self):
+        for postion in self.positions[-1]:
+            if postion == 0:
+                return False
+        return True
+    
+    def _remove_last_row_tiles(self):
+        positions = []
+        for index in range(len(self.positions[-1])):
+            position = [index, len(self.positions) - 1]
+            self.positions[position[1]][position[0]] = 0
+            positions.append(position)
+        for figure in self.figures:
+            figure.remove_tiles_at_postions(positions)
+            
+    def fill_last_row(self):
+        for index in range(len(self.positions[-1])):
+            position = [index, len(self.positions) - 1]
+            self.positions[position[1]][position[0]] = 1
+            figure = Figure(self.display_surface)
+            figure.one_tile_figure(position)
+            self.figures.append(figure) 
