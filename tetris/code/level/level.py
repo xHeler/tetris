@@ -57,7 +57,7 @@ class Level:
             self.board = Board()
             print("Game Over")
         if self.delay.is_cooldown_left():
-            self.board.update(self.player.direction)
+            self.board.update(self.player)
         self.board.draw()
 
     def change_speed(self):

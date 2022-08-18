@@ -1,3 +1,4 @@
+from turtle import pos
 from utils.settings import SHAPES_PATH
 from figure.color import Color
 from figure.shape import Shape
@@ -5,7 +6,7 @@ from figure.tile import Tile
 
 
 class Figure:
-    def __init__(self, display_surface):
+    def __init__(self, display_surface, visible = False):
         # display surface
         self.display_surface = display_surface
         
@@ -21,16 +22,19 @@ class Figure:
         # build figure
         self._build_figure()
         
+        # visible
+        self.visible = visible
+        
     def draw(self):
         for tile in self.tiles:
             tile.draw(self.display_surface)
             
-    def move_figure(self, direction):
-        if direction == 1 and self._is_move__left_possible():
+    def move_figure(self, direction, positions):
+        if direction == 1 and self._is_move__left_possible(positions):
             for tile in self.tiles:
                 tile.move_down_one_position()
                 tile.move_left_one_position()
-        elif direction == 2 and self._is_move__right_possible():
+        elif direction == 2 and self._is_move__right_possible(positions):
             for tile in self.tiles:
                 tile.move_down_one_position()
                 tile.move_right_one_position()
@@ -57,22 +61,35 @@ class Figure:
         for tile in self.tiles:
             if tile.position[1] <= row:
                 tile.move_down_one_position()
-    
+                
+    def change_visible(self, visible):
+        self.visible = visible
+        for tile in self.tiles:
+            tile.visible = self.visible
+
     def _build_figure(self):
         color = self.color.get_color()
         positions = self.shape.get_random_shape()
         for position in positions:
             self.tiles.append(Tile(position, color))
             
-    def _is_move__right_possible(self):
+    def _is_move__right_possible(self, positions):
         for position in self.get_tiles_positions():
             if position[0] == 8:
                 return False
+            if position[1] < 0:
+                continue
+            if positions[position[1]][position[0] + 1] == 1:
+                return False
         return True
-    
-    def _is_move__left_possible(self):
+
+    def _is_move__left_possible(self, positions):
         for position in self.get_tiles_positions():
             if position[0] == 0:
+                return False
+            if position[1] < 0:
+                continue
+            if positions[position[1]][position[0] - 1] == 1:
                 return False
         return True
     

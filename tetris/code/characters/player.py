@@ -16,6 +16,3 @@ class Player:
             self.direction = 2
         elif keys[pygame.K_SPACE] or keys[pygame.K_DOWN]:
             self.direction = -1
-        else:
-            self.direction = 0
-            
