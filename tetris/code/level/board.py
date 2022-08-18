@@ -29,7 +29,7 @@ class Board:
 
         
     def update(self, player):
-        self._clear_and_move_rows()
+        self.clear_and_move_rows()
         if not self.game_over:
             self._check_next_figure_move()
             self.figure.move_figure(player.direction, self.positions)
@@ -38,6 +38,24 @@ class Board:
     def draw(self):
         for figure in self.figures + [self.figure]:
             figure.draw()
+            
+    def clear_and_move_rows(self):
+        points = 0
+        for i in range(len(MAP) -1, -1, -1):
+            if self._is_row_full(i):
+                self._remove_row(i)
+                self._move_figures(i)
+                points += 1
+        return points
+            
+    def fill_row(self, row):
+        for index in range(len(self.positions[-1])):
+            position = [index, row]
+            self.positions[position[1]][position[0]] = 1
+            figure = Figure(self.display_surface)
+            figure.one_tile_figure(position)
+            self.figures.append(figure) 
+
             
     def _add_figure_status(self):
         figure_positions = self.figure.get_tiles_positions()
@@ -92,17 +110,3 @@ class Board:
             figure.move_tiles_at_row(row)
         self.positions.pop(row)
         self.positions.insert(0, [0 ,0 ,0 ,0 ,0, 0, 0, 0, 0])
-        
-    def _clear_and_move_rows(self):
-        for i in range(len(MAP) -1, -1, -1):
-            if self._is_row_full(i):
-                self._remove_row(i)
-                self._move_figures(i)
-            
-    def fill_row(self, row):
-        for index in range(len(self.positions[-1])):
-            position = [index, row]
-            self.positions[position[1]][position[0]] = 1
-            figure = Figure(self.display_surface)
-            figure.one_tile_figure(position)
-            self.figures.append(figure) 

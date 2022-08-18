@@ -54,9 +54,15 @@ class Level:
         self.player.update()
         self.change_speed()
         if self.board.game_over:
+            print("Game Over. Score: ", self.player.score)
             self.board = Board()
-            print("Game Over")
+            self.player = Player()
+            
         if self.delay.is_cooldown_left():
+            multiplier = self.board.clear_and_move_rows()
+            if multiplier > 0:
+                self.player.add_score(multiplier)
+                print("Score: ", self.player.score)
             self.board.update(self.player)
         self.board.draw()
 

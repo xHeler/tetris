@@ -4,6 +4,7 @@ import pygame
 class Player:
     def __init__(self):
         self.direction = 0
+        self.score = 0
     
     def update(self):
         self.input()
@@ -16,3 +17,6 @@ class Player:
             self.direction = 2
         elif keys[pygame.K_SPACE] or keys[pygame.K_DOWN]:
             self.direction = -1
+            
+    def add_score(self, multiplier): 
+        self.score += multiplier * 100
