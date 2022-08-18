@@ -52,6 +52,11 @@ class Figure:
         for tile in self.tiles:
             if tile.position == position:
                 self.tiles.remove(tile)
+                
+    def move_tiles_at_row(self, row):
+        for tile in self.tiles:
+            if tile.position[1] <= row:
+                tile.move_down_one_position()
     
     def _build_figure(self):
         color = self.color.get_color()

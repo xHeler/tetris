@@ -29,10 +29,7 @@ class Board:
 
         
     def update(self, direction):
-        if self._is_last_row_full():
-            self._remove_last_row_tiles()
-            print("Czyszcze")
-            return
+        self._clear_and_move_rows()
         if not self.game_over:
             self._check_next_figure_move()
             self.figure.move_figure(direction)
@@ -74,24 +71,36 @@ class Board:
     def _is_figure_should_stop(self, position):
         return position[1] == 18 or self.positions[position[1]+1][position[0]] == 1
     
-    def _is_last_row_full(self):
-        for postion in self.positions[-1]:
+    def _is_row_full(self, row):
+        for postion in self.positions[row]:
             if postion == 0:
                 return False
         return True
     
-    def _remove_last_row_tiles(self):
+    def _remove_row(self, row):
         positions = []
         for index in range(len(self.positions[-1])):
-            position = [index, len(self.positions) - 1]
+            position = [index, row]
             self.positions[position[1]][position[0]] = 0
             positions.append(position)
         for figure in self.figures:
             figure.remove_tiles_at_postions(positions)
             
-    def fill_last_row(self):
+    def _move_figures(self, row):
+        for figure in self.figures:
+            figure.move_tiles_at_row(row)
+        self.positions.pop(row)
+        self.positions.insert(0, [0 ,0 ,0 ,0 ,0, 0, 0, 0, 0])
+        
+    def _clear_and_move_rows(self):
+        for i in range(len(MAP) -1, -1, -1):
+            if self._is_row_full(i):
+                self._remove_row(i)
+                self._move_figures(i)
+            
+    def fill_row(self, row):
         for index in range(len(self.positions[-1])):
-            position = [index, len(self.positions) - 1]
+            position = [index, row]
             self.positions[position[1]][position[0]] = 1
             figure = Figure(self.display_surface)
             figure.one_tile_figure(position)

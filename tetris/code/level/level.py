@@ -34,14 +34,13 @@ class Level:
         self.background_surface = pygame.transform.scale(self.background_surface, (WIDTH, HEIGHT))
         self.background_rectangle = self.background_surface.get_rect(topleft=(0, 0))
 
-        self.delay = Delay(300)
+        self.delay = Delay(200)
 
         #= create game board
         self.board = Board()
         
         # create player
         self.player = Player()
-        self.board.fill_last_row()
 
     def update(self):
         """ Updating postin and drawing objects.
