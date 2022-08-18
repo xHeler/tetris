@@ -9,6 +9,7 @@ import pygame
 from utils.settings import HEIGHT, WIDTH, BACKGROUND_PATH
 from level.board import Board
 from utils.delay import Delay
+from characters.player import Player
 
 
 class Level:
@@ -33,10 +34,13 @@ class Level:
         self.background_surface = pygame.transform.scale(self.background_surface, (WIDTH, HEIGHT))
         self.background_rectangle = self.background_surface.get_rect(topleft=(0, 0))
 
-        self.delay = Delay(10)
+        self.delay = Delay(300)
 
-        #! Create testing tile by specific color
+        #= create game board
         self.board = Board()
+        
+        # create player
+        self.player = Player()
 
 
     def update(self):
@@ -47,11 +51,13 @@ class Level:
         self.display_surface.blit(self.background_surface,
                                   self.background_rectangle.topleft)
         
-        #! test moving
+        # player moves
+        self.player.update()
+        
         if self.board.game_over:
             self.board = Board()
             print("Game Over")
         if self.delay.is_cooldown_left():
-            self.board.update()
+            self.board.update(self.player.direction)
         self.board.draw()
 

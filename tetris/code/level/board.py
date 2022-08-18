@@ -28,10 +28,10 @@ class Board:
         self.shape = Shape(SHAPES_PATH)
 
         
-    def update(self):
+    def update(self, direction):
         if not self.game_over:
             self._check_next_figure_move()
-            self._move_figure()
+            self.figure.move_figure(direction)
 
     def draw(self):
         for figure in self.figures + [self.figure]:
@@ -57,9 +57,6 @@ class Board:
                 self.figures.append(self.figure)
                 self.figure = Figure(self.display_surface)
                 return
-            
-    def _move_figure(self):
-        self.figure.move_figure_down()
             
     def _is_game_over(self, position):
         for item in self.positions[0]:

@@ -58,23 +58,27 @@ class Tile(pygame.sprite.Sprite):
         
         # stop
         self.stop = False
-
-    def update(self):
-        """Move tile one level down.
-        """
-        self._move_down_one_position()
     
     def draw(self, display_surface):
         if self.visible:
             display_surface.blit(self.image, self.rect.topleft)
             
-    def _move_down_one_position(self):
+    def move_down_one_position(self):
         self.position[1] += 1
         self.topleft[1] += TILESIZE        
         self.rect.topleft = self.topleft
         if self.position[1] == 0:
             self.visible = True
+    
+    def move_left_one_position(self):
+        self.position[0] -= 1
+        self.topleft[0] -= TILESIZE        
+        self.rect.topleft = self.topleft
 
+    def move_right_one_position(self):
+        self.position[0] += 1
+        self.topleft[0] += TILESIZE        
+        self.rect.topleft = self.topleft
 
 def get_graphics_dictionary(path):
     """ Make dictionary of objects at specific path
