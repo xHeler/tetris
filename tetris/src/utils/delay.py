@@ -10,6 +10,7 @@ class Delay:
     """Class Delay
 
     Attribiutes:
+        last: int, Store number of ticks during the game.
         cooldown: int, Positive number define time between two actions in
             miliseconds.
     """
@@ -17,20 +18,34 @@ class Delay:
         """Constructor
 
         Setup last catched ticks.
+
+        Attribiutes:
+            last: int, Store number of ticks during the game.
+            cooldown: int, Positive number define time between two actions in
+                miliseconds.
         """
         self.last = pygame.time.get_ticks()
-        self.cooldown = cooldown
+        self._cooldown = cooldown
 
     def is_cooldown_left(self):
         """Check cooldown left
 
         Do something when cooldown left.
 
-        Todo:
+        #Todo:
             * change to universal
         """
         now = pygame.time.get_ticks()
-        if now - self.last >= self.cooldown:
+        if now - self.last >= self._cooldown:
             self.last = now
             return True
         return False
+
+    def set_cooldown(self, cooldown):
+        """Set cooldown value
+
+        Cooldown argument is in milliseconds.
+        """
+        if cooldown < 0:
+            return
+        self._cooldown = cooldown

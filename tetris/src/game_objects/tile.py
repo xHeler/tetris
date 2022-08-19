@@ -13,7 +13,7 @@ from os import walk
 
 import pygame
 
-from utils.settings import TILESIZE, OFFSET_WIDTH, OFFSET_HEIGHT
+from src.utils.settings import TILESIZE, TILES_PATH, OFFSET_WIDTH, OFFSET_HEIGHT
 
 
 
@@ -40,11 +40,9 @@ class Tile(pygame.sprite.Sprite):
                     color = 'green'
         """
         super().__init__()
-
-         # Get specific image from dictionary by color
-        colors = get_graphics_dictionary('../graphics/tiles')
+        colors = get_colors_surface_dictionary(TILES_PATH)
         self.image = colors[color]
-        
+
         self.position = position
         self.topleft = [OFFSET_WIDTH + position[0] * TILESIZE,
                         OFFSET_HEIGHT + position[1] * TILESIZE]
@@ -52,46 +50,61 @@ class Tile(pygame.sprite.Sprite):
         # Rescale image and set position
         self.image = pygame.transform.scale(self.image, (TILESIZE, TILESIZE))
         self.rect = self.image.get_rect(topleft = self.topleft)
-        
+
         # visible
         self.visible = visible
-        
-        # stop
-        self.stop = False
-    
+
     def draw(self, display_surface):
+        """Draw visible tile
+
+        If visible is true, draw tile on display.
+
+        Args:
+            display_surface: Surface, Origin surface where tile will be displayed.
+        """
         if self.visible:
             display_surface.blit(self.image, self.rect.topleft)
-            
+
     def move_down_one_position(self):
+        """Move tile down
+
+        Move tile one position down, when tile should exist in map, then set
+            visible to true.
+        """
         self.position[1] += 1
-        self.topleft[1] += TILESIZE        
+        self.topleft[1] += TILESIZE
         self.rect.topleft = self.topleft
         if self.position[1] == 0:
             self.visible = True
-    
+
     def move_left_one_position(self):
+        """Move tile one postion left
+        """
         self.position[0] -= 1
-        self.topleft[0] -= TILESIZE        
+        self.topleft[0] -= TILESIZE
         self.rect.topleft = self.topleft
 
     def move_right_one_position(self):
+        """Move tile one postion right
+        """
         self.position[0] += 1
-        self.topleft[0] += TILESIZE        
+        self.topleft[0] += TILESIZE
         self.rect.topleft = self.topleft
 
-def get_graphics_dictionary(path):
+
+
+def get_colors_surface_dictionary(path):
     """ Make dictionary of objects at specific path
 
     At this moment all image files should be .png or .jpg.
 
     Example:
-        get_graphics_dictionary('../graphics/tiles')
+        get_colors_dictionary('../graphics/tiles')
 
     Returns:
         Dictionary with keys and image surface as values.
 
-    TODO:
+    #TODO:
         * possible else image extensions
     """
     surface_dictionary = {}

@@ -6,11 +6,11 @@ Drawing objects and updates their positions in game loop.
 
 import pygame
 
-from utils.settings import HEIGHT, WIDTH, BACKGROUND_PATH, COOLDOWN
-from level.board import Board
-from utils.delay import Delay
-from characters.player import Player
-from utils.scoreboard import Scoreboard
+from src.game_world.board import Board
+from src.utils.delay import Delay
+from src.utils.scoreboard import Scoreboard
+from src.utils.settings import HEIGHT, WIDTH, BACKGROUND_PATH, COOLDOWN
+from src.entities.player import Player
 
 
 class Level:
@@ -39,10 +39,10 @@ class Level:
 
         #= create game board
         self.board = Board()
-        
+
         # create player
         self.player = Player()
-        
+
         self.scoreboard = Scoreboard()
 
     def update(self):
@@ -50,28 +50,43 @@ class Level:
 
         Put visual object on the main game display layer.
         """
+        # draw background
         self.display_surface.blit(self.background_surface,
                                   self.background_rectangle.topleft)
-        
-        # player moves
+
+        # player interaction
         self.player.update()
         self.change_speed()
-        
+
+        # reset game when it's over
         if self.board.is_game_over():
-            print("Game Over. Score: ", self.player.score)
             self.board = Board()
             self.player = Player()
-            
+
+        # move figures after cooldown
         if self.delay.is_cooldown_left():
-            multiplier = self.board.clear_and_move_rows()
-            if multiplier > 0:
-                self.player.add_score(multiplier)
+            self._check_rows()
             self.board.update(self.player)
         self.board.draw()
         self.scoreboard.draw(self.player.score)
 
     def change_speed(self):
+        """ Change game speed:
+
+        When player push space or key down, game speed increased.
+        """
         if self.player.direction == -1:
-            self.delay.cooldown = 0
+            self.delay.set_cooldown(0)
         else:
-            self.delay.cooldown = COOLDOWN
+            self.delay.set_cooldown(COOLDOWN)
+
+    def _check_rows(self):
+        """Checking any row is fill
+
+        Board function return points given by full row and if it exists, add
+            this score for player.
+        """
+        multiplier = self.board.get_points_for_full_row()
+        if multiplier > 0:
+            self.player.add_score(multiplier)
+                

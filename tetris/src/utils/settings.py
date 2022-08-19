@@ -14,8 +14,10 @@ COOLDOWN = 300
 OFFSET_WIDTH = 11
 OFFSET_HEIGHT = 62
 FPS = 60
-BACKGROUND_PATH = '../graphics/background.jpg'
-SHAPES_PATH = '../shapes'
+BACKGROUND_PATH = 'assets/graphics/background/background.jpg'
+SHAPES_PATH = 'assets/shapes'
+TILES_PATH = 'assets/graphics/tiles'
+FONT_PATH = 'assets/fonts/telelower.ttf'
 COLORS = ['brown', 'gold', 'green', 'orange', 'yellow']
 MAP = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
        [0, 0, 0, 0, 0, 0, 0, 0, 0],
