@@ -1,0 +1,12 @@
+{% extends '_base.html' %}
+
+{% block title %}{% endblock title %}
+{% block content %}
+    {% for score in score_list %}
+        <div>
+            <h2>{{ score.author.username }}, 
+                {{ score.points }}, 
+                {{ score.created_at|date:"G:i:s | d m Y" }}</h2>
+        </div>
+    {% endfor %}
+{% endblock content %}
