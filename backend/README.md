@@ -3,12 +3,12 @@ CRUD application to show players scores.
 
 ## Setup
 First thing first:
-```shell
+```sh
 git clone https://github.com/xHeler/tetris.git
-cd backend
+cd tetris/backend
 ```
 Build docker:
-```shell
+```sh
 docker-compose up -d --build
 docker-compose down # stop
 ```

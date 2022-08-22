@@ -3,17 +3,18 @@ Tetris' game written using pygame.
 
 # Setup
 Clone repository.
-```shell
+```sh
 git clone https://github.com/xHeler/tetris.git
-cd game
+cd tetris/game
 ```
 Create environment and install dependencies.
-```shell
+```sh
 python -m venv .venv
-source .venv/bin/activate
+.\.venv\Scripts\activate # windows
+source .venv/bin/activate # linux
 pip install -r requirements.txt
 ```
 Run a game.
-```shell
-python src.main
+```sh
+python -m  src.main
 ```
