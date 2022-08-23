@@ -1,12 +1,56 @@
 {% extends '_base.html' %}
+{% load static %}
+{% load humanize %}
 
 {% block title %}{% endblock title %}
 {% block content %}
-    {% for score in score_list %}
-        <div>
-            <h2>{{ score.author.username }}, 
-                {{ score.points }}, 
-                {{ score.created_at|date:"G:i:s | d m Y" }}</h2>
-        </div>
+<table>
+    <thead>
+      <tr>
+        <th scope="col">Rank</th>
+        <th scope="col">Username</th>
+        <th scope="col">Points</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <td colspan="4" id="td-footer">
+          <div class="pagination">
+            {% if page_obj.has_previous %}
+              <a href="?page=1">
+                <img class="arrow-image" src="{% static 'images/dbl-left-arrow.png' %}">
+              </a>
+              <a href="?page={{ page_obj.previous_page_number }}">
+                <img class="arrow-image" src="{% static 'images/left-arrow.png' %}">
+              </a>
+            {% endif %}
+      
+            {% if page_obj.has_next %}
+              <p>
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </p>
+              <a href="?page={{ page_obj.next_page_number }}">
+                <img class="arrow-image" src="{% static 'images/right-arrow.png' %}">
+              </a>
+              <a href="?page={{ page_obj.paginator.num_pages }}">
+                <img class="arrow-image" src="{% static 'images/dbl-right-arrow.png' %}">
+              </a>
+              {% endif %}
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+    <tbody>
+    {% for score in page_obj %}
+        <tr>
+            <th>#{{ score.get_ranking_position }}</th>
+            <th scope="row">{{ score.author.username}}</th>
+            <td>{{ score.points }}</td>
+            {% comment %} <td>{{ score.created_at|date:"G:i:s | d-n-Y" }}</td> {% endcomment %}
+            <td>{{ score.created_at | naturaltime}}</td>
+        </tr>
     {% endfor %}
+    </tbody>
+</table>
 {% endblock content %}

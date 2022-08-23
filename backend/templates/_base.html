@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Scoreboard{% endblock title %}</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 <body>
-    {% block content %}
-    {% endblock content %}
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="nav-logo">
+          <img id="logo-image" src="{% static 'images/logo.png' %}">
+          TETRIS
+        </a>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#"><i class="fa-solid fa-user sign-in-icon"></i> Sign In</a></li>
+          <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+        </ul>
+      </nav>
+    <div class='content'>
+        {% block content %}
+        {% endblock content %}
+    </div>
 </body>
 </html>

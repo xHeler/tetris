@@ -1,0 +1,122 @@
+/* LIST */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  color: #ffffff;
+}
+
+table {
+  max-width: 960px;
+  margin: 10px auto;
+}
+
+caption {
+  font-size: 1.6em;
+  font-weight: 400;
+  padding: 10px 0;
+}
+
+thead th {
+  font-weight: 400;
+  background: #ff9f1c;
+  color: #FFF;
+}
+
+tr {
+  background: #ffbf69;
+  border-bottom: 1px solid #FFF;
+  margin-bottom: 5px;
+}
+
+tr:nth-child(even) {
+  background: #ffbf69;
+}
+
+th, td {
+  text-align: left;
+  padding: 20px;
+  font-weight: 300;
+}
+
+tfoot tr {
+  background: none;
+  text-align: center;
+}
+
+tfoot td {
+  padding: 10px 2px;
+  font-size: 0.9em;
+  color: #ffbf69;
+}
+
+.arrow-image {
+  width: 3.5em;
+  height: auto;
+}
+
+a {
+  text-decoration:none;
+}
+
+#td-footer {
+  text-align: center;
+}
+
+/* NAVBAR */
+
+@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2ec4b6;
+  font-family: Lato, sans-serif;
+  padding: 25px 5%;
+  color: #edf6f9;
+  font-size: large;
+}
+
+.nav-logo {
+  color: #edf6f9;
+  text-decoration: none;
+  user-select: none;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.nav-links a:hover {
+  background-color: #2ec4b6;
+}
+
+.sign-in-icon {
+  display: inline-block;
+  margin-right: 0.8em;
+}
+
+#logo-image {
+  width: 2em;
+  height: auto;
+}
