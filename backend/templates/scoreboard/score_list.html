@@ -4,56 +4,89 @@
 
 {% block title %}{% endblock title %}
 {% block content %}
-<table>
-    <thead>
-      <tr id="tr-head">
-        <th scope="col">Rank</th>
-        <th scope="col">Username</th>
-        <th scope="col">Avatar</th>
-        <th scope="col">Points</th>
-        <th scope="col">Date</th>
-      </tr>
-    </thead>
-    <tfoot>
-      <tr>
-        <td colspan="5" id="td-footer">
-          <div class="pagination">
-            {% if page_obj.has_previous %}
-              <a href="?page=1">
-                <img class="arrow-image" src="{% static 'images/dbl-left-arrow.png' %}">
-              </a>
-              <a href="?page={{ page_obj.previous_page_number }}">
-                <img class="arrow-image" src="{% static 'images/left-arrow.png' %}">
-              </a>
-            {% endif %}
-      
-            {% if page_obj.has_next %}
-              <p>
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-              </p>
-              <a href="?page={{ page_obj.next_page_number }}">
-                <img class="arrow-image" src="{% static 'images/right-arrow.png' %}">
-              </a>
-              <a href="?page={{ page_obj.paginator.num_pages }}">
-                <img class="arrow-image" src="{% static 'images/dbl-right-arrow.png' %}">
-              </a>
-              {% endif %}
-          </div>
-        </td>
-      </tr>
-    </tfoot>
-    <tbody>
-    {% for score in page_obj %}
-        <tr>
-            <th data-label="Rank">{{ score.get_ranking_position }}</th>
-            <th data-label="Avatar">{{ score.author.username}}</th>
-            <th data-label="Points">
-              <img class="avatar" src="{% static 'images/avatar.jpg' %}">
-            </th>
-            <td data-label="Date">{{ score.points }}</td>
-            <td>{{ score.created_at | naturaltime}}</td>
+<div class="content">
+  <div class="info">
+    <div class="card medium-card">
+      <div class="left">
+        <h2 class="small-txt">My Rank</h2>
+        <h1 class="medium-txt">3RD PLACE</h1>
+      </div>
+      <div class="right">
+        <h2 class="small-txt">My Score</h2>
+        <h1 class="medium-txt">24</h1>
+      </div>
+    </div>
+    <div class="dark profile medium-card">
+      <h1 id="profile-top-txt">Top Sender Last Week</h1>
+      <img class="card-avatar" src="https://www.formula1.com/content/dam/fom-website/drivers/D/DANRIC01_Daniel_Ricciardo/danric01.png.transform/2col-retina/image.png">
+      <h1 id="profile-mid-txt">DANIEL RICCIARDO</h1>
+      <h1 id="profile-bot-txt" class="blue">DANIEL RICCIARDO</h1>
+    </div>
+  </div>
+  <div class="dark table-div">
+    <div id="top-table">
+      <h1 id="table-title">RECEIVED KUDOS</h1>
+      <h2 class="dark" id="table-date">Sunday, Feb. 23 - Sunday, Feb. 30</h2>
+    </div>
+    <table>
+      <thead>
+        <tr id="tr-head">
+          <th scope="col">Rank</th>
+          <th scope="col">Avatar</th>
+          <th scope="col">Username</th>
+          <th scope="col">Points</th>
+          <th scope="col">Date</th>
         </tr>
-    {% endfor %}
-    </tbody>
-</table>
+      </thead>
+      <tbody>
+        <tr>
+          <th data-label="Rank">
+            <h3 class="gold">1</h3>
+          </th>
+          <th data-label="Avatar">
+            <img class="avatar-table" src="https://www.formula1.com/content/dam/fom-website/drivers/D/DANRIC01_Daniel_Ricciardo/danric01.png.transform/2col-retina/image.png">
+          </th>
+          <th data-label="Username">Nexivis</th>
+          <th data-label="Points" class="points gold">300</th>
+          <th data-label="Date" class="date">3 minutes ago</th>
+        </tr>
+        <!-- NEXT -->
+        <tr>
+          <th data-label="Rank">
+            <h3 class="silver">2</h3>
+          </th>
+          <th data-label="Avatar">
+            <img class="avatar-table" src="https://www.formula1.com/content/dam/fom-website/drivers/D/DANRIC01_Daniel_Ricciardo/danric01.png.transform/2col-retina/image.png">
+          </th>
+          <th data-label="Username">Nexivis</th>
+          <th data-label="Points" class="points silver">200</th>
+          <th data-label="Date" class="date">1 minutes ago</th>
+        </tr>
+        <!-- NEXT -->
+        <tr>
+          <th data-label="Rank">
+            <h3 class="brown">3</h3>
+          </th>
+          <th data-label="Avatar">
+            <img class="avatar-table" src="https://www.formula1.com/content/dam/fom-website/drivers/D/DANRIC01_Daniel_Ricciardo/danric01.png.transform/2col-retina/image.png">
+          </th>
+          <th data-label="Username">Nexivis</th>
+          <th data-label="Points" class="points brown">200</th>
+          <th data-label="Date" class="date">1 minutes ago</th>
+        </tr>
+        <!-- NEXT -->
+        <tr>
+          <th data-label="Rank">
+            <h3>4</h3>
+          </th>
+          <th data-label="Avatar">
+            <img class="avatar-table" src="https://www.formula1.com/content/dam/fom-website/drivers/D/DANRIC01_Daniel_Ricciardo/danric01.png.transform/2col-retina/image.png">
+          </th>
+          <th data-label="Username">Nexivis</th>
+          <th data-label="Points" class="points">50</th>
+          <th data-label="Date" class="date">32 minutes ago</th>
+        </tr>
+      </tbody>
+  </div>
+</div>
 {% endblock content %}
