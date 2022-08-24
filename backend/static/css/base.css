@@ -17,6 +17,11 @@ body {
   margin-top: 10px;
 }
 
+.recent {
+  display: flex;
+  justify-content: space-around;
+}
+
 .info {
   margin: 10px;
 }
@@ -36,6 +41,25 @@ th, td {
   text-align: center;
   font-weight: 300;
   text-shadow: 1px 1px 1px rgba(54, 53, 53, 1);
+}
+
+.txt-recently {
+  font-weight: 200;
+  font-size: 0.9rem;
+}
+
+.txt-recently {
+  font-weight: 200;
+  font-size: 0.9rem;
+}
+
+#txt-recently-title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  background-color: #C61414;
+  border-radius: 5px;
+  padding: 2px 3px;
+  border: solid 1px gray;
 }
 
 /* TABLES */
