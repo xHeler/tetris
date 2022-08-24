@@ -13,4 +13,6 @@ class ScoreListView(ListView):
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of recently 5 results
         context['recently_results'] = Score.objects.all().order_by('-created_at')[:5]
+        # Add best player
+        context['best_score'] = Score.objects.first()
         return context

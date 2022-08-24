@@ -8,6 +8,7 @@
   <!-- PROFILE -->
   <div class="info">
     <!-- User info -->
+    {% if user.is_authenticated %}
     <div class="card medium-card">
       <div class="left">
         <h2 class="small-txt">My Rank</h2>
@@ -18,18 +19,22 @@
         <h1 class="medium-txt">24</h1>
       </div>
     </div>
+    {% endif %}
     <!--END USER INFO-->
     <!-- TOP PLAYER -->
     <div class="dark profile medium-card">
-      <h1 id="profile-top-txt">Top Sender Last Week</h1>
-      <img class="card-avatar" src="https://www.formula1.com/content/dam/fom-website/drivers/D/DANRIC01_Daniel_Ricciardo/danric01.png.transform/2col-retina/image.png">
-      <h1 id="profile-mid-txt">DANIEL RICCIARDO</h1>
-      <h1 id="profile-bot-txt" class="blue">DANIEL RICCIARDO</h1>
+      <h1 id="profile-top-txt"><span id="txt-best-player-title">
+        Top Score Last Week
+      </span>
+      </h1>
+      <img class="card-avatar" src="{% static 'images/avatar.jpg' %}">
+      <h1 id="profile-mid-txt">{{ best_score.author.username }}</h1>
+      <h1 id="profile-bot-txt" class="blue">{{ best_score.points }}</h1>
     </div>
     <!-- END TOP PLAYER -->
     <!-- RECENTLY LIST -->
     <div class="dark profile medium-card">
-      <h1 class="medium-txt"><span id="txt-recently-title">Recently Results</span></h1>
+      <h1 class="medium-txt"><span id="txt-recently-title">Latest Results</span></h1>
       {% for score in recently_results %}
       <div class="recent">
         <h1 class='txt-recently'>{{ score.created_at | naturaltime}}</h1>
@@ -98,11 +103,20 @@
         <tr>
           <th data-label="Rank">
             {% if score.get_ranking_position == 1 %}
-              <h3 class="gold">{{ score.get_ranking_position }}</h3>
+              <h3><span class="gold-background rounded-span">
+                {{ score.get_ranking_position }}
+                </span>
+              </h3>
             {% elif score.get_ranking_position == 2 %}
-              <h3 h3 class="silver">{{ score.get_ranking_position }}</h3>
+              <h3><span class="silver-background rounded-span">
+                {{ score.get_ranking_position }}
+                </span>
+              </h3>
             {% elif score.get_ranking_position == 3 %}
-              <h3 class="brown">{{ score.get_ranking_position }}</h3>
+              <h3><span class="brown-background rounded-span">
+                {{ score.get_ranking_position }}
+                </span>
+              </h3>
             {% else %}
               <h3>{{ score.get_ranking_position }}</h3>
             {% endif %}

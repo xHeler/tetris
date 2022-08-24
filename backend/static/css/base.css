@@ -62,6 +62,15 @@ th, td {
   border: solid 1px gray;
 }
 
+#txt-best-player-title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  background-color: #8d127a;
+  border-radius: 5px;
+  padding: 2px 3px;
+  border: solid 1px gray;
+}
+
 /* TABLES */
 
 
@@ -351,4 +360,19 @@ a {
     margin: 1rem auto 0px auto;
     width: 100%;
   }
+}
+
+.gold-background {
+  background-color: #fdcb6e;
+}
+.silver-background {
+  background-color: #A3AFBF;
+}
+.brown-background {
+  background-color: #E17055;
+}
+
+.rounded-span {
+  padding: 5px 10px;
+  border-radius: 5px;
 }
