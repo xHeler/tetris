@@ -6,16 +6,17 @@
 {% block content %}
 <table>
     <thead>
-      <tr>
+      <tr id="tr-head">
         <th scope="col">Rank</th>
         <th scope="col">Username</th>
+        <th scope="col">Avatar</th>
         <th scope="col">Points</th>
         <th scope="col">Date</th>
       </tr>
     </thead>
     <tfoot>
       <tr>
-        <td colspan="4" id="td-footer">
+        <td colspan="5" id="td-footer">
           <div class="pagination">
             {% if page_obj.has_previous %}
               <a href="?page=1">
@@ -44,10 +45,12 @@
     <tbody>
     {% for score in page_obj %}
         <tr>
-            <th>#{{ score.get_ranking_position }}</th>
-            <th scope="row">{{ score.author.username}}</th>
-            <td>{{ score.points }}</td>
-            {% comment %} <td>{{ score.created_at|date:"G:i:s | d-n-Y" }}</td> {% endcomment %}
+            <th data-label="Rank">{{ score.get_ranking_position }}</th>
+            <th data-label="Avatar">{{ score.author.username}}</th>
+            <th data-label="Points">
+              <img class="avatar" src="{% static 'images/avatar.jpg' %}">
+            </th>
+            <td data-label="Date">{{ score.points }}</td>
             <td>{{ score.created_at | naturaltime}}</td>
         </tr>
     {% endfor %}
