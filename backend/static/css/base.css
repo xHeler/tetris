@@ -23,7 +23,11 @@ body {
 }
 
 .info {
-  margin: 10px;
+  margin: 0 10px;
+}
+
+.table-div {
+  margin-top: 10px;
 }
 
 table {
@@ -85,7 +89,7 @@ th, td {
   display: flex;
   justify-content: space-around;
   color: black;
-  background-color: white;
+  background-color: #e5e5e5;
 }
 
 .medium-txt {
@@ -109,7 +113,7 @@ th, td {
 }
 
 .medium-card {
-  margin: 15px auto;
+  margin: 0 auto 20px 0;
   border-radius: 10px;
   width: 300px;
   padding: 20px 5px 10px 10px;
@@ -118,7 +122,7 @@ th, td {
 
 .card-avatar {
   width: 100px;
-  height: auto;
+  height: 100px;
   border-radius: 100px;
   background-color: white;
   margin: 15px;
@@ -207,6 +211,7 @@ table {
 
 .avatar-table {
   width: 40px;
+  height: 40px;
   background-color: white;
   border-radius: 40px;
   margin: 10px;

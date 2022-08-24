@@ -27,7 +27,7 @@
         Top Score Last Week
       </span>
       </h1>
-      <img class="card-avatar" src="{% static 'images/avatar.jpg' %}">
+      <img class="card-avatar" src="{{ best_score.author.avatar.url }}">
       <h1 id="profile-mid-txt">{{ best_score.author.username }}</h1>
       <h1 id="profile-bot-txt" class="blue">{{ best_score.points }}</h1>
     </div>
@@ -122,7 +122,7 @@
             {% endif %}
           </th>
           <th data-label="Avatar">
-            <img class="avatar-table" src="{% static 'images/avatar.jpg' %}">
+            <img class="avatar-table" src="{{ score.author.avatar.url }}">
           </th>
           <th data-label="Username">{{ score.author.username }}</th>
           {% if score.get_ranking_position == 1 %}
