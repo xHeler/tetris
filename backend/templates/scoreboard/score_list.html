@@ -1,59 +1,22 @@
 {% extends '_base.html' %}
 {% load static %}
-{% load humanize %}
+
 
 {% block title %}{% endblock title %}
 {% block content %}
 <div class="content">
   <!-- PROFILE -->
-  <div class="info">
-    <!-- User info -->
-    {% if user.is_authenticated %}
-    <div class="card medium-card">
-      <div class="left">
-        <h2 class="small-txt">My Rank</h2>
-        <h1 class="medium-txt">3RD PLACE</h1>
-      </div>
-      <div class="right">
-        <h2 class="small-txt">My Score</h2>
-        <h1 class="medium-txt">24</h1>
-      </div>
-    </div>
-    {% endif %}
-    <!--END USER INFO-->
-    <!-- TOP PLAYER -->
-    <div class="dark profile medium-card">
-      <h1 id="profile-top-txt"><span id="txt-best-player-title">
-        Top Score Last Week
-      </span>
-      </h1>
-      <img class="card-avatar" src="{{ best_score.author.avatar.url }}">
-      <h1 id="profile-mid-txt">{{ best_score.author.username }}</h1>
-      <h1 id="profile-bot-txt" class="blue">{{ best_score.points }}</h1>
-    </div>
-    <!-- END TOP PLAYER -->
-    <!-- RECENTLY LIST -->
-    <div class="dark profile medium-card">
-      <h1 class="medium-txt"><span id="txt-recently-title">Latest Results</span></h1>
-      {% for score in recently_results %}
-      <div class="recent">
-        <h1 class='txt-recently'>{{ score.created_at | naturaltime}}</h1>
-        <h1 class='txt-recently'>{{ score.author.username}}</h1>
-        <h1 class='txt-recently blue'>{{ score.points }}</h1>
-      </div>
-      {% endfor %}
-    </div>
-    <!-- END RECENTLY LIST -->
-  </div>
-  <!-- END PROFILE -->
+  {% include 'scoreboard/score_cards.html' %}
+
   <!-- TABLE DIV -->
   <div class="dark table-div">
+
     <!-- CAPTION -->
     <div id="top-table">
       <h1 id="table-title">LEADERBOARD</h1>
       <h2 class="dark" id="table-date">{% now "SHORT_DATETIME_FORMAT" %}</h2>
     </div>
-    <!-- END CAPTION -->
+
     <!-- TABLE -->
     <table>
       <!-- TABLE HEAD-->
@@ -66,81 +29,13 @@
           <th scope="col">Date</th>
         </tr>
       </thead>
-      <!-- END TABLE HEAD-->
-      <!-- TABLE FOOT-->
-      <tfoot>
-        <tr>
-          <td colspan="5" id="td-footer">
-            <div class="pagination">
-              {% if page_obj.has_previous %}
-                <a href="?page=1">
-                  <img class="arrow-image" src="{% static 'images/dbl-left-arrow.png' %}">
-                </a>
-                <a href="?page={{ page_obj.previous_page_number }}">
-                  <img class="arrow-image" src="{% static 'images/left-arrow.png' %}">
-                </a>
-              {% endif %}
-        
-              {% if page_obj.has_next %}
-                <p>
-                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                </p>
-                <a href="?page={{ page_obj.next_page_number }}">
-                  <img class="arrow-image" src="{% static 'images/right-arrow.png' %}">
-                </a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">
-                  <img class="arrow-image" src="{% static 'images/dbl-right-arrow.png' %}">
-                </a>
-                {% endif %}
-            </div>
-          </td>
-        </tr>
-      </tfoot>
-      <!-- END TABLE FOOT-->
-      <tbody>
-        {% for score in page_obj %}
-        <!-- ELEMENT -->
-        <tr>
-          <th data-label="Rank">
-            {% if score.get_ranking_position == 1 %}
-              <h3><span class="gold-background rounded-span">
-                {{ score.get_ranking_position }}
-                </span>
-              </h3>
-            {% elif score.get_ranking_position == 2 %}
-              <h3><span class="silver-background rounded-span">
-                {{ score.get_ranking_position }}
-                </span>
-              </h3>
-            {% elif score.get_ranking_position == 3 %}
-              <h3><span class="brown-background rounded-span">
-                {{ score.get_ranking_position }}
-                </span>
-              </h3>
-            {% else %}
-              <h3>{{ score.get_ranking_position }}</h3>
-            {% endif %}
-          </th>
-          <th data-label="Avatar">
-            <img class="avatar-table" src="{{ score.author.avatar.url }}">
-          </th>
-          <th data-label="Username">{{ score.author.username }}</th>
-          {% if score.get_ranking_position == 1 %}
-            <th data-label="Points" class="points gold">{{ score.points }}</th>
-          {% elif score.get_ranking_position == 2 %}
-            <th data-label="Points" class="points silver">{{ score.points }}</th>
-          {% elif score.get_ranking_position == 3 %}
-            <th data-label="Points" class="points brown">{{ score.points }}</th>
-          {% else %}
-            <th data-label="Points" class="points">{{ score.points }}</th>
-          {% endif %}
 
-          <th data-label="Date" class="date">{{ score.created_at | naturaltime}}</th>
-        </tr>
-        <!-- END ELEMENT-->
-        {% endfor %}
-      </tbody>
+      <!-- TABLE FOOT-->
+      {% include 'scoreboard/score_table_foot.html' %}
+
+      <!-- TABLE BODY-->
+      {% include 'scoreboard/score_table.html' %}
+
   </div>
-  <!-- END TABLE DIV -->
 </div>
 {% endblock content %}

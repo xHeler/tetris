@@ -1,0 +1,41 @@
+{% load static %} {% load humanize %}
+
+<div class="info">
+  <!-- USER INFO CARD -->
+  {% if user.is_authenticated %}
+  <div class="card medium-card">
+    <div class="left">
+      <h2 class="small-txt">My Rank</h2>
+      <h1 class="medium-txt">3RD PLACE</h1>
+    </div>
+    <div class="right">
+      <h2 class="small-txt">My Score</h2>
+      <h1 class="medium-txt">24</h1>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- TOP PLAYER CARD-->
+  <div class="dark profile medium-card">
+    <h1 id="profile-top-txt">
+      <span id="txt-best-player-title"> Top Score Last Week </span>
+    </h1>
+    <img class="card-avatar" src="{{ best_score.author.avatar.url }}" />
+    <h1 id="profile-mid-txt">{{ best_score.author.username }}</h1>
+    <h1 id="profile-bot-txt" class="blue">{{ best_score.points }}</h1>
+  </div>
+
+  <!-- LATEST RESULTS CARD -->
+  <div class="dark profile medium-card">
+    <h1 class="medium-txt">
+      <span id="txt-recently-title">Latest Results</span>
+    </h1>
+    {% for score in recently_results %}
+    <div class="recent">
+      <h1 class="txt-recently">{{ score.created_at | naturaltime}}</h1>
+      <h1 class="txt-recently">{{ score.author.username}}</h1>
+      <h1 class="txt-recently blue">{{ score.points }}</h1>
+    </div>
+    {% endfor %}
+  </div>
+</div>

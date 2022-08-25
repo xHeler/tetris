@@ -1,0 +1,44 @@
+{% load static %}
+
+<tfoot>
+  <tr>
+    <td colspan="5" id="td-footer">
+      <!--PAGINATOR-->
+      <div class="pagination">
+        <!-- PREVIUS PAGE -->
+        {% if page_obj.has_previous %}
+        <a href="?page=1">
+          <img
+            class="arrow-image"
+            src="{% static 'images/dbl-left-arrow.png' %}"
+          />
+        </a>
+        <a href="?page={{ page_obj.previous_page_number }}">
+          <img class="arrow-image" src="{% static 'images/left-arrow.png' %}" />
+        </a>
+        {% endif %}
+
+        <!-- NEXT PAGE -->
+        {% if page_obj.has_next %}
+
+        <!-- PAGE NUMBER -->
+        <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</p>
+
+        <!-- NEXT PAGE BUTTON -->
+        <a href="?page={{ page_obj.next_page_number }}">
+          <img
+            class="arrow-image"
+            src="{% static 'images/right-arrow.png' %}"
+          />
+        </a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">
+          <img
+            class="arrow-image"
+            src="{% static 'images/dbl-right-arrow.png' %}"
+          />
+        </a>
+        {% endif %}
+      </div>
+    </td>
+  </tr>
+</tfoot>

@@ -1,0 +1,56 @@
+{% load static %} {% load humanize %}
+
+<tbody>
+  {% for score in page_obj %}
+  <!-- ELEMENT -->
+  <tr>
+    <!-- TOP 3 RANKS COLORS -->
+    <th data-label="Rank">
+      {% if score.get_ranking_position == 1 %}
+      <h3>
+        <span class="gold-background rounded-span">
+          {{ score.get_ranking_position }}
+        </span>
+      </h3>
+      {% elif score.get_ranking_position == 2 %}
+      <h3>
+        <span class="silver-background rounded-span">
+          {{ score.get_ranking_position }}
+        </span>
+      </h3>
+      {% elif score.get_ranking_position == 3 %}
+      <h3>
+        <span class="brown-background rounded-span">
+          {{ score.get_ranking_position }}
+        </span>
+      </h3>
+      {% else %}
+      <h3>{{ score.get_ranking_position }}</h3>
+      {% endif %}
+    </th>
+
+    <!-- AVATAR -->
+    <th data-label="Avatar">
+      <img class="avatar-table" src="{{ score.author.avatar.url }}" />
+    </th>
+
+    <!-- USERNAME -->
+    <th data-label="Username">{{ score.author.username }}</th>
+
+    <!-- TOP 3 RANKS BACKGROUND COLORS -->
+    {% if score.get_ranking_position == 1 %}
+    <th data-label="Points" class="points gold">{{ score.points }}</th>
+    {% elif score.get_ranking_position == 2 %}
+    <th data-label="Points" class="points silver">{{ score.points }}</th>
+    {% elif score.get_ranking_position == 3 %}
+    <th data-label="Points" class="points brown">{{ score.points }}</th>
+    {% else %}
+    <th data-label="Points" class="points">{{ score.points }}</th>
+    {% endif %}
+
+     <!-- DATE -->
+    <th data-label="Date" class="date">{{ score.created_at | naturaltime}}</th>
+    
+  </tr>
+  {% endfor %}
+</tbody>
