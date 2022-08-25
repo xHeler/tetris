@@ -8,4 +8,4 @@ class CustomUser(AbstractUser):
         upload_to='avatars', null=True,
         default='avatar.jpg',
     )
-    bio = models.TextField(max_length=150)
+    bio = models.TextField(max_length=150, blank=True)

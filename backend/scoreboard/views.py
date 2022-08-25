@@ -5,35 +5,13 @@ from django.shortcuts import render
 
 from .models import Score
 
-
-# class ScoreListView(ListView):
-#     paginate_by = 10
-#     model = Score
-#     context_object_name = 'score_list'
-#     template_name = 'scoreboard/score_list.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         # Add in a QuerySet of recently 5 results
-#         context['recently_results'] = Score.objects.all().order_by(
-#             '-created_at')[:5]
-#         # Add best player
-#         context['best_score'] = Score.objects.first()
-#         # Add personal stats
-#         if self.request.user.is_authenticated:
-#             context['user_score'] = Score.objects.filter(
-#                 author__username=self.request.user)[0]
-#             context['user_position'] = Score.objects.filter(
-#                 points__gt=context['user_score'].points).count() + 1
-#         return context
-
-
 def HomePage(request):
     today = date.today()
     start_date = today - timedelta(days=today.weekday())
     end_date = today + timedelta(days=-today.weekday(), weeks=1)
 
     score_list = Score.objects.filter(created_at__range=[start_date, end_date])
+    
     paginator = Paginator(score_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -41,13 +19,14 @@ def HomePage(request):
     recently_results = score_list.order_by('-created_at')[:5]
 
     start_date_last_week = start_date - timedelta(days=7)
-    end_date_last_week = start_date - timedelta(days=7)
     best_score_last_week = Score.objects.filter(
-        created_at__range=[start_date_last_week, end_date_last_week]).first()
+        created_at__range=[start_date_last_week, start_date]).first()
 
+    user_score = None
+    user_position = None
     if request.user.is_authenticated:
-        user_score = Score.objects.filter(author__username=request.user)[0]
-        user_position = Score.objects.filter(
+        user_score = score_list.filter(author__username=request.user)[0]
+        user_position = score_list.filter(
             points__gt=user_score.points).count() + 1
 
     context = {'page_obj': page_obj,
