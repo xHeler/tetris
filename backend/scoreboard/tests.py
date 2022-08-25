@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-
+from datetime import datetime    
 from .models import Score
 
 
@@ -21,3 +21,6 @@ class ScoreModelTest(TestCase):
     def test_post_model(self):
         self.assertEqual(self.score.author.username, 'testuser')
         self.assertEqual(self.score.points, 300)
+
+    def test_player_ranking(self):
+        self.assertEqual(self.score.get_ranking_position(), 1)
