@@ -10,5 +10,10 @@ class ScoreAdmin(admin.ModelAdmin):
         'created_at',
     )
 
+    list_editable = (
+        'points',
+        'created_at',
+    )
+
 
 admin.site.register(Score, ScoreAdmin)

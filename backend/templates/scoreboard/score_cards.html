@@ -6,25 +6,27 @@
   <div class="card medium-card">
     <div class="left">
       <h2 class="small-txt">My Rank</h2>
-      <h1 class="medium-txt">3RD PLACE</h1>
+      <h1 class="medium-txt">{{ user_position | ordinal }} PLACE</h1>
     </div>
     <div class="right">
       <h2 class="small-txt">My Score</h2>
-      <h1 class="medium-txt">24</h1>
+      <h1 class="medium-txt">{{ user_score.points }}</h1>
     </div>
   </div>
   {% endif %}
 
   <!-- TOP PLAYER CARD-->
+  {% if best_score_last_week %}
   <div class="dark profile medium-card">
     <h1 id="profile-top-txt">
       <span id="txt-best-player-title"> Top Score Last Week </span>
     </h1>
-    <img class="card-avatar" src="{{ best_score.author.avatar.url }}" />
-    <h1 id="profile-mid-txt">{{ best_score.author.username }}</h1>
-    <h1 id="profile-bot-txt" class="blue">{{ best_score.points }}</h1>
+    <img class="card-avatar" src="{{ best_score_last_week.author.avatar.url }}" />
+    <h1 id="profile-mid-txt">{{ best_score_last_week.author.username }}</h1>
+    <h1 id="profile-bot-txt" class="blue">{{ best_score_last_week.points }}</h1>
   </div>
-
+  {% endif %}
+  
   <!-- LATEST RESULTS CARD -->
   <div class="dark profile medium-card">
     <h1 class="medium-txt">
