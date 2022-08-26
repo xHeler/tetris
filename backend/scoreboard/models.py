@@ -1,4 +1,4 @@
-from datetime import timezone,  timedelta, datetime
+from datetime import timedelta, datetime
 from django.utils import timezone
 from django.conf import settings
 from django.db import models

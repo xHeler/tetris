@@ -29,10 +29,14 @@ def HomePage(request):
         user_position = score_list.filter(
             points__gt=user_score.points).count() + 1
 
-    context = {'page_obj': page_obj,
-        'start_date': start_date, 'end_date': end_date,
-               'score_list': score_list, 'recently_results': recently_results,
-               'best_score_last_week': best_score_last_week,
-               'user_score': user_score, 'user_position': user_position}
+    context = {
+        'page_obj': page_obj,
+        'start_date': start_date, 
+        'end_date': end_date,
+        'recently_results': recently_results,
+        'best_score_last_week': best_score_last_week,
+        'user_score': user_score, 
+        'user_position': user_position
+    }
 
     return render(request, 'scoreboard/score_list.html', context)
