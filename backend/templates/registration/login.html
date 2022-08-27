@@ -1,11 +1,60 @@
-{% extends '_base.html' %} 
+{% load static %}
 
-{% block title %}Login{% endblock title %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <!-- TITLE -->
+    <title>Scoreboard - Login</title>
 
-{%block content %}
-<h2>Log In</h2>
-<form method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Log In</button>
-</form>
-{% endblock content %}
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+  </head>
+  <body>
+  <!-- NAVBAR -->
+  <div class="nav">{% include '_navbar.html' %}</div>
+
+  <div class="content">
+    <div class="signin dark">
+      <form action="{% url 'login' %}" method="post" autocomplete="off"> {% csrf_token %}
+        <div class="group head">
+          <h2>Welcome Back,</h2>
+          <p>Sign In To Continue</p>
+            {% if form.errors %}
+                <p>username or password not correct</p>
+            {% endif %}
+        </div>
+
+        <div class="group">
+          <label for="username-field">Email or Username</label><br />
+
+          <input type="text" name="username" id="username-field" required />
+        </div>
+
+        <div class="group">
+          <label for="password-field">Password</label><br />
+          <input type="password" name="password" id="password-field" required />
+          <span
+            toggle="#password-field"
+            class="fa fa-fw fa-eye field-icon toggle-password"
+          ></span>
+        </div>
+        <div class="group forgot-pass-link">
+          <a href="#">Forget Password?</a>
+        </div>
+        <div class="group">
+          <button type="submit"><span>Login</span></button>
+        </div>
+        <div class="group sign-up-link">
+          <p>New User? <a href="#">Signup</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+  </body>
+</html>

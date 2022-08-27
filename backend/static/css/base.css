@@ -4,6 +4,9 @@
 /* SCORE_LIST */
 @import url("score_list.css");
 
+/* LOGIN */
+@import url("auth.css");
+
 *, *:before, *:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
