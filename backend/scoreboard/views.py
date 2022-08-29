@@ -24,7 +24,7 @@ def HomePage(request):
 
     user_score = None
     user_position = None
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and score_list:
         user_score = score_list.filter(author__username=request.user)[0]
         user_position = score_list.filter(
             points__gt=user_score.points).count() + 1

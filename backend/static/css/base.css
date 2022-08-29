@@ -72,4 +72,12 @@ body {
     margin: auto;
   }
 
+  .signin {
+    width: 20rem;
+    border-radius: 1.1rem;
+    font-family: "Poppins", sans-serif;
+    padding: 1rem;
+    margin: 2rem auto;
+  }
+
 }

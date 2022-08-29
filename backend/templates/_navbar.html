@@ -21,7 +21,7 @@
 <!--NAVBAR LINKS -->
 <div class="nav-links">
   {% if user.is_authenticated %}
-  <a class="nav-item" href="#">Profile</a>
+  {% comment %} <a class="nav-item" href="#">Profile</a> {% endcomment %}
   <a class="nav-item" href="{% url 'logout' %}">Logout</a>
   {% else %}
   <a class="nav-item" href="{% url 'login' %}">Sign In</a>
