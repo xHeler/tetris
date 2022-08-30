@@ -12,6 +12,7 @@ urlpatterns = [
     # Local apps
     path("accounts/", include('accounts.urls')),
     path('', include('scoreboard.urls')),
+    path("api/v1/", include("scoreboard.api.urls")), 
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

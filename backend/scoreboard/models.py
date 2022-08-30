@@ -23,5 +23,8 @@ class Score(models.Model):
         count = score_list.filter(points__gt=self.points).count()
         return count + 1
 
+    def __str__(self):
+        return "username: " + self.author.username + ", points: " + str(self.points)
+    
     class Meta:
         ordering = ['-points']

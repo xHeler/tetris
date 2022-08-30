@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     'django.contrib.humanize',
     # 3rd Party
+    "rest_framework",
     "crispy_forms",
     "crispy_bootstrap5",
     "allauth",
