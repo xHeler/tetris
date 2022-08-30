@@ -22,9 +22,9 @@
 <div class="nav-links">
   {% if user.is_authenticated %}
   {% comment %} <a class="nav-item" href="#">Profile</a> {% endcomment %}
-  <a class="nav-item" href="{% url 'logout' %}">Logout</a>
+  <a class="nav-item" href="{% url 'account_logout' %}">Logout</a>
   {% else %}
-  <a class="nav-item" href="{% url 'login' %}">Sign In</a>
-  <a class="nav-item" href="{% url 'signup' %}">Sign Up</a>
+  <a class="nav-item" href="{% url 'account_login' %}">Log In</a>
+  <a class="nav-item" href="{% url 'account_signup' %}">Sign Up</a>
   {% endif %}
 </div>

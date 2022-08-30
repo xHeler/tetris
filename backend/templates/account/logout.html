@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Log Out{% endblock %}
+
+{% block content %}
+<div class="signin dark">
+    <div class="group head">
+        <h2>Logout</h2>
+        <p>Are you sure you want to log out?</p>
+    </div>
+  <form method="post" action="{% url 'account_logout' %}">
+    {% csrf_token %}
+    <div class="group">
+        {{ form|crispy }}
+    </div>
+    <div class="group forgot-pass-link">
+        <a href="#"></a>
+    </div>
+    <div class="group">
+        <button type="submit"><span>Log Out</span></button>
+    </div>
+  </form>
+</div>
+{% endblock content %}

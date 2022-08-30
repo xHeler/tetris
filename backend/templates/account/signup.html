@@ -1,0 +1,30 @@
+{% extends "_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block content %}
+<div class="signin dark">
+  <div class="group head">
+    <h2>Welcome,</h2>
+    <p>Sign Up now!</p>
+      <div class="txt-error">
+      {% if form.errors %}
+          <p>{{ form.errors }}</p>
+      {% endif %}
+      </div>
+  </div>
+  <form method="post">
+    {% csrf_token %}
+    <div class="group">
+      {{ form|crispy }}
+    </div>
+    <div class="group forgot-pass-link">
+      <a href="#"></a>
+    </div>
+    <div class="group">
+      <button type="submit"><span>Sign up</span></button>
+    </div>
+  </form>
+</div>
+{% endblock content %}
