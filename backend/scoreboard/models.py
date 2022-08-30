@@ -10,8 +10,7 @@ class Score(models.Model):
         on_delete=models.CASCADE,
     )
     points = models.IntegerField()
-    created_at = models.DateTimeField(
-        auto_now_add=False, blank=True, default=timezone.now)
+    edited_at = models.DateTimeField(auto_now=True)
 
     def get_ranking_position(self):
         today = datetime.today()
@@ -19,7 +18,7 @@ class Score(models.Model):
         end_date = today + timedelta(days=-today.weekday(), weeks=1)
 
         score_list = Score.objects.filter(
-            created_at__range=[start_date, end_date])
+            edited_at__range=[start_date, end_date])
 
         count = score_list.filter(points__gt=self.points).count()
         return count + 1

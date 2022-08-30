@@ -2,7 +2,7 @@
 
 <div class="info">
   <!-- USER INFO CARD -->
-  {% if user.is_authenticated %}
+  {% if user.is_authenticated and user_position %}
   <div class="card medium-card">
     <div class="left">
       <h2 class="small-txt">My Rank</h2>
@@ -34,7 +34,7 @@
     </h1>
     {% for score in recently_results %}
     <div class="recent">
-      <h1 class="txt-recently">{{ score.created_at | naturaltime}}</h1>
+      <h1 class="txt-recently">{{ score.edited_at | naturaltime}}</h1>
       <h1 class="txt-recently">{{ score.author.username}}</h1>
       <h1 class="txt-recently blue">{{ score.points }}</h1>
     </div>

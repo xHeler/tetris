@@ -7,12 +7,11 @@ class ScoreAdmin(admin.ModelAdmin):
     list_display = (
         'author',
         'points',
-        'created_at',
+        'edited_at',
     )
 
     list_editable = (
         'points',
-        'created_at',
     )
 
 
