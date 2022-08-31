@@ -15,6 +15,7 @@ import pygame
 
 from src.utils.settings import WIDTH, HEIGHT, FPS
 from src.game_world.level import Level
+from src.game_world.menu import Menu
 
 
 class Game:
@@ -41,6 +42,7 @@ class Game:
         self.clock = pygame.time.Clock()
 
         self.level = Level()
+        self.menu = Menu()
 
     def run(self):
         """Run a game main loop.
@@ -51,7 +53,8 @@ class Game:
         while True:
             self._catch_events()
             self.screen.fill('black')
-            self.level.update()
+            # self.level.update()
+            self.menu.update()
             pygame.display.update()
             self.clock.tick(FPS)
 
@@ -59,6 +62,7 @@ class Game:
         """Catching events during the game.
         """
         for event in pygame.event.get():
+            self.menu.catch_events(event)
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
