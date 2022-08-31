@@ -39,13 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "django.contrib.sites",
     'django.contrib.humanize',
+
     # 3rd Party
     "rest_framework",
     "corsheaders",
+    "rest_framework.authtoken",
+    "dj_rest_auth",
     "crispy_forms",
     "crispy_bootstrap5",
     "allauth",
     "allauth.account",
+
     # Local
     "accounts.apps.AccountsConfig",
     'scoreboard.apps.ScoreboardConfig',
@@ -70,6 +74,10 @@ CORS_ORIGIN_WHITELIST = (
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
     ],
 }
 

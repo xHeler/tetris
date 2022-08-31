@@ -4,6 +4,8 @@ from ..models import Score
 
 
 class ScoreSerializer(serializers.ModelSerializer):
+    author = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
+    
     class Meta:
         fields = (
             'id',
@@ -12,14 +14,17 @@ class ScoreSerializer(serializers.ModelSerializer):
             'edited_at',
         )
         model = Score
-    
-    def update(self, instance, validated_data):
+        
+    def create(self, validated_data):
         user = self.context['request'].user
         
-        if user.pk != instance.author.pk:
-            raise serializers.ValidationError({"authorize": "You dont have permission for this user."})
+        if Score.objects.filter(author__username=user).exists():
+            score = Score.objects.filter(author=user).first()
+            if validated_data['points'] <= score.points:
+                return score
+            score.author = user
+            score.points = validated_data['points']
+            score.save()
+            return score
+        return Score.objects.create(author=user, points=validated_data['points'])
         
-        instance.author = validated_data['author']
-        instance.points = validated_data['points']
-        instance.save()
-        return instance

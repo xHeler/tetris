@@ -5,7 +5,7 @@ from .serializers import ScoreSerializer
 
 
 class PostList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAdminUser,)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = Score.objects.all()
     serializer_class = ScoreSerializer
 
