@@ -7,7 +7,7 @@ class Input:
         self.display_surface = pygame.display.get_surface()
         
         # font
-        self.font = pygame.font.Font(None, 32)
+        self.font = pygame.font.Font(None, 24)
         
         # password
         self.password = password
@@ -16,10 +16,10 @@ class Input:
         self.user_text = ''
         
         # create rectangle
-        self.input_rect = pygame.Rect(x, y, x * 2, 32)
+        self.input_rect = pygame.Rect(x, y, x * 2, 24)
         self.border_rect =  pygame.Rect(
             x - border/2, y - border/2, 
-            x*2 + border, 32 + border
+            x*2 + border, 24 + border
         )
         
         # colors
@@ -38,7 +38,7 @@ class Input:
         if event.type == pygame.KEYDOWN and self.active:
             if event.key == pygame.K_BACKSPACE:
                 self.user_text = self.user_text[:-1]
-            elif len(self.user_text) < 15:
+            elif len(self.user_text) < 25:
                 self.user_text += event.unicode
                 
     def update(self):
@@ -51,5 +51,5 @@ class Input:
             pygame.draw.rect(self.display_surface, pygame.Color('white'), self.border_rect)
         pygame.draw.rect(self.display_surface, self.color, self.input_rect)
         
-        self.display_surface.blit(text_surface, (self.input_rect.x + 5, self.input_rect.y + 5))
+        self.display_surface.blit(text_surface, (self.input_rect.x + 2, self.input_rect.y + 5))
         

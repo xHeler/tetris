@@ -53,8 +53,11 @@ class Game:
         while True:
             self._catch_events()
             self.screen.fill('black')
-            # self.level.update()
-            self.menu.update()
+            # Navigation
+            if self.menu.connection_status:
+                self.level.update()
+            else:
+                self.menu.update()
             pygame.display.update()
             self.clock.tick(FPS)
 

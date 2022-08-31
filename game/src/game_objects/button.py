@@ -14,16 +14,16 @@ class Button:
         self.input_rect.center = (x, y)
         
         # colors
-        self.background_color = pygame.Color('White')
+        self.background_color = pygame.Color('white')
         text_color = pygame.Color('black')
         
         # text surface        
         self.text_surface = self.font.render(text, True, text_color)
 
-    def catch_events(self, event):
+    def is_button_pressed(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.input_rect.collidepoint(event.pos):
-                self.background_color = pygame.Color('gray')
+                self.change_button_color('gray')
                 return True
         return False
     
@@ -32,3 +32,7 @@ class Button:
         width = self.text_surface.get_width() / 2
         pygame.draw.rect(self.display_surface, self.background_color, self.input_rect)
         self.display_surface.blit(self.text_surface, (self.input_rect.center[0] - width, self.input_rect.center[1] - height))
+
+
+    def change_button_color(self, color_text = 'white'):
+        self.background_color = pygame.Color(color_text)

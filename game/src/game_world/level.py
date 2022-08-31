@@ -11,6 +11,7 @@ from src.utils.delay import Delay
 from src.utils.scoreboard import Scoreboard
 from src.utils.settings import HEIGHT, WIDTH, BACKGROUND_PATH, COOLDOWN
 from src.entities.player import Player
+from src.utils.network import send_score_to_server
 
 
 class Level:
@@ -60,6 +61,7 @@ class Level:
 
         # reset game when it's over
         if self.board.is_game_over():
+            send_score_to_server(self.player.score)
             self.board = Board()
             self.player = Player()
 
