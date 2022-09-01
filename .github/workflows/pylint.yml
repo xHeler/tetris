@@ -16,8 +16,12 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
+        cd game
         python -m pip install --upgrade pip
+        python -m pip install virtualenv
+        source .venv/bin/activate
         pip install pylint
+        pip install -r requirements.txt
     - name: Analysing the code with pylint
       run: |
-        pylint game/src --extension-pkg-whitelist=pygame
+        pylint src --extension-pkg-whitelist=pygame
