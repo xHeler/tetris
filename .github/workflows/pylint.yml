@@ -25,4 +25,5 @@ jobs:
         pip install -r requirements.txt
     - name: Analysing the code with pylint
       run: |
+        source .venv/bin/activate
         pylint src --extension-pkg-whitelist=pygame
