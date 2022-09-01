@@ -28,6 +28,7 @@ class Board:
     #TODO
      * change figure into tiles list
     """
+
     def __init__(self):
         """Constructor
 
@@ -75,7 +76,7 @@ class Board:
             down and increment points value.
         """
         points = 0
-        for i in range(len(MAP) -1, -1, -1):
+        for i in range(len(MAP) - 1, -1, -1):
             if self._is_row_full(i):
                 self._remove_row(i)
                 self._move_figures(i)
@@ -181,5 +182,4 @@ class Board:
         for figure in self.figures:
             figure.move_tiles_above_row(row)
         self.tiles_positions.pop(row)
-        self.tiles_positions.insert(0, [0 ,0 ,0 ,0 ,0, 0, 0, 0, 0])
-        
+        self.tiles_positions.insert(0, [0, 0, 0, 0, 0, 0, 0, 0, 0])

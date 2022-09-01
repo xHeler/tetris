@@ -14,6 +14,7 @@ class Delay:
         cooldown: int, Positive number define time between two actions in
             miliseconds.
     """
+
     def __init__(self, cooldown):
         """Constructor
 
@@ -44,7 +45,8 @@ class Delay:
     def set_cooldown(self, cooldown):
         """Set cooldown value
 
-        Cooldown argument is in milliseconds.
+        Arguments:
+            cooldown: int, Time in milliseconds.
         """
         if cooldown < 0:
             return

@@ -1,55 +1,83 @@
+# -*- coding: utf-8 -*-
+"""Input field
+
+Interactive filed, when active catch pressed keys.
+"""
 import pygame
 
 
 class Input:
-    def __init__(self, x, y, password=False, border=6):
-        # Get the display surface
-        self.display_surface = pygame.display.get_surface()
-        
-        # font
+    """Input class
+
+    Attribiutes:
+        font, Font, Pygame font object.
+        password_field: password_field, When true, replace letter to stars.
+        user_text: str, Text wrote by actor.
+        active: bool, True if button was pressed.
+        color: color, Input color.
+        input_rect: Rect, Object which will be displayed.
+    """
+
+    def __init__(self, coordinates, password_field=False, border=6):
+        """Constructor
+
+        Attribiutes:
+            font, Font, Pygame font object.
+            password_field: password_field, When true, replace letter to stars.
+            user_text: str, Text wrote by actor.
+            active: bool, True if button was pressed.
+            color: color, Input color.
+            input_rect: Rect, Object which will be displayed.
+        """
         self.font = pygame.font.Font(None, 24)
-        
-        # password
-        self.password = password
-        
-        # input text
+        self.password_field = password_field
         self.user_text = ''
-        
-        # create rectangle
-        self.input_rect = pygame.Rect(x, y, x * 2, 24)
-        self.border_rect =  pygame.Rect(
-            x - border/2, y - border/2, 
-            x*2 + border, 24 + border
-        )
-        
-        # colors
-        self.color = pygame.Color('red')
-        self.border_color = pygame.Color('white')
-        
         self.active = False
-        
+        self.color = pygame.Color('red')
+
+        # create rectangle
+        self.input_rect = pygame.Rect(
+            coordinates[0], coordinates[1], coordinates[0] * 2, 24)
+        self.border_rect = pygame.Rect(
+            coordinates[0] - border/2, coordinates[1] - border/2,
+            coordinates[0] * 2 + border, 24 + border
+        )
+
     def catch_events(self, event):
+        """Catch events
+
+        Check when input was pressed, and catch pressed keys.
+        """
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.input_rect.collidepoint(event.pos):
                 self.active = True
             else:
                 self.active = False
-                
+
         if event.type == pygame.KEYDOWN and self.active:
             if event.key == pygame.K_BACKSPACE:
                 self.user_text = self.user_text[:-1]
-            elif len(self.user_text) < 25:
+            else:
                 self.user_text += event.unicode
-                
+
     def update(self):
-        if self.password:
+        """Update
+
+        Change positions, colors, text write and draw objects.
+        """
+        display_surface = pygame.display.get_surface()
+        if self.password_field:
             text_length = len(self.user_text)
-            text_surface = self.font.render('*' * text_length, True, (255, 255, 255))
+            text_surface = self.font.render(
+                '*' * text_length, True, (255, 255, 255))
         else:
-            text_surface = self.font.render(self.user_text, True, (255, 255, 255))
+            text_surface = self.font.render(
+                self.user_text, True, (255, 255, 255))
         if self.active:
-            pygame.draw.rect(self.display_surface, pygame.Color('white'), self.border_rect)
-        pygame.draw.rect(self.display_surface, self.color, self.input_rect)
-        
-        self.display_surface.blit(text_surface, (self.input_rect.x + 2, self.input_rect.y + 5))
-        
+            white_color = pygame.Color('white')
+            pygame.draw.rect(display_surface,
+                             white_color, self.border_rect)
+        pygame.draw.rect(display_surface, self.color, self.input_rect)
+
+        display_surface.blit(
+            text_surface, (self.input_rect.x + 2, self.input_rect.y + 5))

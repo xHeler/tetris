@@ -18,6 +18,7 @@ class Player:
                 0 - neutral
         score, int, Number of earned points.
     """
+
     def __init__(self):
         """Constructor
 

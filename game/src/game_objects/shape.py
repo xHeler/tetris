@@ -18,6 +18,7 @@ class Shape:
         path, str, Path to directory with shape files.
         _positions, list, Positions get from shape file.
     """
+
     def __init__(self, path):
         """Constructor
 
@@ -73,10 +74,11 @@ class Shape:
         positions = []
         symbols = self._read_from_file_names(file)
 
-        for column, _ in enumerate(symbols):
-            for row, __ in enumerate(symbols[column]):
-                if symbols[column][row] == '#':
-                    positions.append([row, -column - 1])
+        for column_number, column in enumerate(symbols):
+            for row_number, element in enumerate(column):
+                if element == '#':
+                    positions.append([row_number, -column_number - 1])
+
         return positions
 
     def _read_from_file_names(self, file):

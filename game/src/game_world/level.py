@@ -11,7 +11,7 @@ from src.utils.delay import Delay
 from src.utils.scoreboard import Scoreboard
 from src.utils.settings import HEIGHT, WIDTH, BACKGROUND_PATH, COOLDOWN
 from src.entities.player import Player
-from src.utils.network import send_score_to_server
+from src.utils.network import Network
 
 
 class Level:
@@ -22,23 +22,23 @@ class Level:
         background_surface, Surface, Surface where background exist.
         background_rectangle, Rect, Rectangle filled of window size by loaded image.
     """
+
     def __init__(self):
         """ Level constructor.
 
         The constructor configure displaying tools and setup background.
 
         """
-        # Get the display surface
-        self.display_surface = pygame.display.get_surface()
-
         # Creating background image
         self.background_surface = pygame.image.load(BACKGROUND_PATH).convert()
-        self.background_surface = pygame.transform.scale(self.background_surface, (WIDTH, HEIGHT))
-        self.background_rectangle = self.background_surface.get_rect(topleft=(0, 0))
+        self.background_surface = pygame.transform.scale(
+            self.background_surface, (WIDTH, HEIGHT))
+        self.background_rectangle = self.background_surface.get_rect(
+            topleft=(0, 0))
 
         self.delay = Delay(COOLDOWN)
 
-        #= create game board
+        # = create game board
         self.board = Board()
 
         # create player
@@ -46,14 +46,16 @@ class Level:
 
         self.scoreboard = Scoreboard()
 
+        self.network = Network()
+
     def update(self):
         """ Updating postin and drawing objects.
 
         Put visual object on the main game display layer.
         """
         # draw background
-        self.display_surface.blit(self.background_surface,
-                                  self.background_rectangle.topleft)
+        pygame.display.get_surface().blit(self.background_surface,
+                                          self.background_rectangle.topleft)
 
         # player interaction
         self.player.update()
@@ -61,7 +63,7 @@ class Level:
 
         # reset game when it's over
         if self.board.is_game_over():
-            send_score_to_server(self.player.score)
+            self.network.send_score_to_server(self.player.score)
             self.board = Board()
             self.player = Player()
 
@@ -91,4 +93,3 @@ class Level:
         multiplier = self.board.get_points_for_full_row()
         if multiplier > 0:
             self.player.add_score(multiplier)
-                

@@ -1,37 +1,84 @@
-import requests
+# -*- coding: utf-8 -*-
+"""Network tools
+
+Networking between server and client, catching errors.
+"""
 import ast
+import requests
 
 from src.utils.settings import LOGIN_URL, CONN_URL
 
 
-key = None
-username = None
+class Network:
+    """Network class
 
-def connect_to_server(email, password):
-    global key, username
-    json = {}
-    json['username'] = email
-    json['email'] = email
-    json['password'] = password
-    response = requests.post(LOGIN_URL, json = json)
-    response_json = ast.literal_eval(response.text)
-    if "key" in response_json:
-        key = response_json['key']
-        username = email
-        return True, None
-    else:
-        return False, response_json
-    
+    Attribiutes:
+        errors: str, Response text message.
+        key: str, User login token.
+        username: str, Player username.
+    """
 
-def send_score_to_server(points):
-    global key, username
-    if not key:
+    def __init__(self):
+        """Constructor
+
+        Attribiutes:
+            errors: str, Response text message.
+            key: str, User login token.
+            username: str, Player username.
+        """
+        self.errors = None
+        self.key = None
+        self.username = None
+
+    def is_connected_to_server(self, email, password):
+        """Login and connect to server
+
+        Send post method to authentication API and wait for response.
+
+        Return:
+            bool: True, If connection successful and False when something.
+                its wrong.
+        """
+        json = Network.make_json(
+            username=email, email=email, password=password)
+        response = requests.post(LOGIN_URL, json=json, timeout=10)
+
+        response_json = ast.literal_eval(response.text)
+
+        if "key" in response_json:
+            self.key = str(response_json['key'])
+            self.username = email
+            return True
+        self.errors = response_json
         return False
-    json = {}
-    headers = {}
-    json["author"] = username
-    json["points"] = points
-    headers['Authorization'] = 'Token ' + str(key)
-    response = requests.post(CONN_URL, json=json, headers=headers)
-    response_json = ast.literal_eval(response.text)
-    print(str(response_json))
+
+    def send_score_to_server(self, points):
+        """ Updates points at server
+
+        Send new player score into server.
+        """
+        if not self.key:
+            return False
+        json = Network.make_json(author=self.username, points=points)
+        headers = Network.make_json(Authorization='Token ' + self.key)
+
+        response = requests.post(
+            CONN_URL, json=json, headers=headers, timeout=10)
+        self.errors = ast.literal_eval(response.text)
+        return True
+
+    @staticmethod
+    def make_json(**kwargs):
+        """Make json
+
+        Making json from kwargs.
+
+        Example:
+            print(make_json(test=1, hello="abcd"))
+            # return
+            { "test": 1, "hello": "abcd"}
+        """
+        json = {}
+        for key, value in kwargs.items():
+            json[str(key)] = value
+        return json

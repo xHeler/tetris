@@ -51,17 +51,17 @@ class Game:
             control speed of game by clock.
         """
         while True:
-            self._catch_events()
+            self.catch_events()
             self.screen.fill('black')
             # Navigation
-            if self.menu.connection_status:
+            if self.menu.connection_successful:
                 self.level.update()
             else:
                 self.menu.update()
             pygame.display.update()
             self.clock.tick(FPS)
 
-    def _catch_events(self):
+    def catch_events(self):
         """Catching events during the game.
         """
         for event in pygame.event.get():
