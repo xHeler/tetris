@@ -1,4 +1,4 @@
-name: Django-Pylint
+name: Django-Linting
 
 on: [push]
 
@@ -26,4 +26,4 @@ jobs:
       run: |
         cd backend
         source .venv/bin/activate
-        pylint **/*.py
+        pylint **/*.py && flake8 **/*.py
