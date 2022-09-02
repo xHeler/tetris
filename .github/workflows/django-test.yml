@@ -1,14 +1,6 @@
-name: django-test
+name: Django-Test
 
-on:
- push:
-   branches: 
-    - latest
-   
- pull_request:
-    
- schedule:
-   - cron: "0 16 * * 1"  # Weekly on Tuesdays
+on: [push]
 
 jobs:
   run_tests:
