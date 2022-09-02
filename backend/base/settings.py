@@ -77,7 +77,7 @@ REST_FRAMEWORK = {
     ],
 }
 
-SECURE_SSL_REDIRECT=False
+SECURE_SSL_REDIRECT = False
 ROOT_URLCONF = 'base.urls'
 
 TEMPLATES = [

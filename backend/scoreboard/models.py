@@ -1,4 +1,6 @@
-from datetime import timedelta, datetime
+from datetime import timedelta
+
+from django.utils import timezone
 from django.conf import settings
 from django.db import models
 
@@ -12,7 +14,10 @@ class Score(models.Model):
     edited_at = models.DateTimeField(auto_now=True)
 
     def get_ranking_position(self):
-        today = datetime.today()
+        """
+        Return ranking position in this week depends on points.
+        """
+        today = timezone.now()
         start_date = today - timedelta(days=today.weekday())
         end_date = today + timedelta(days=-today.weekday(), weeks=1)
 

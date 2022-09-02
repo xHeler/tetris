@@ -1,5 +1,6 @@
-from datetime import date, timedelta
+from datetime import timedelta
 
+from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
@@ -48,11 +49,14 @@ class ScoreModelTest(TestCase):
 
     def test_score_view_context_dates(self):
         response = self.client.get(reverse('score_list'))
-        today = date.today()
+        today = timezone.now()
         start_date = today - timedelta(days=today.weekday())
         end_date = today + timedelta(days=-today.weekday(), weeks=1)
-        self.assertEqual(response.context['start_date'], start_date)
-        self.assertEqual(response.context['end_date'], end_date)
+        self.assertEqual(
+            response.context['start_date'].date(),
+            start_date.date()
+        )
+        self.assertEqual(response.context['end_date'].date(), end_date.date())
 
     def test_score_view_context_recently_results(self):
         response = self.client.get(reverse('score_list'))
