@@ -58,11 +58,6 @@ class ScoreModelTest(TestCase):
         response = self.client.get(reverse('score_list'))
         self.assertEqual(response.context['recently_results'][0], self.score2)
 
-    def test_score_view_context_best_score_last_week(self):
-        self.score.edited_at -= timedelta(days=7)
-        self.score.save()
-        response = self.client.get(reverse('score_list'))
-
     def test_score_view_for_logged_in_user(self):
         self.client.login(username="testuser", password="testpassword")
         response = self.client.get(reverse('score_list'))
