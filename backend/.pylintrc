@@ -9,7 +9,7 @@
 
 # Add files or directories to the blacklist. They should be base names, not
 # paths.
-ignore=CVS
+ignore=CVS, migrations, settings.py
 
 # Add files or directories matching the regex patterns to the blacklist. The
 # regex matches against base names, not paths.
@@ -63,7 +63,7 @@ confidence=
 # --enable=similarities". If you want to run only the classes checker, but have
 # no Warning level messages displayed, use"--disable=all --enable=classes
 # --disable=W"
-disable=E1101
+disable=E1101, C0114, C0115, C0116
 
 
 [REPORTS]
@@ -317,7 +317,7 @@ max-branches=12
 max-statements=100
 
 # Maximum number of parents for a class (see R0901).
-max-parents=7
+max-parents=14
 
 # Maximum number of attributes for a class (see R0902).
 max-attributes=10

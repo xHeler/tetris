@@ -23,7 +23,8 @@ class Score(models.Model):
         return count + 1
 
     def __str__(self):
-        return "username: " + self.author.username + ", points: " + str(self.points)
+        return "username: " + self.author.username  \
+            + ", points: " + str(self.points)
 
     class Meta:
         ordering = ['-points']

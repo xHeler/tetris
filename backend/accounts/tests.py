@@ -8,8 +8,7 @@ from .views import SignupPageView
 
 class CustomUserTest(TestCase):
     def test_create_user(self):
-        User = get_user_model()
-        user = User.objects.create_user(
+        user = get_user_model().objects.create_user(
             username="test",
             email="test@mail.com",
             password="testpassword1"
@@ -22,9 +21,10 @@ class CustomUserTest(TestCase):
         self.assertFalse(user.is_superuser)
 
     def test_create_superuser(self):
-        User = get_user_model()
-        admin_user = User.objects.create_superuser(
-            username="adminuser", email="adminuser@mail.com", password="adminpassword123"
+        admin_user = get_user_model().objects.create_superuser(
+            username="adminuser",
+            email="adminuser@mail.com",
+            password="adminpassword123"
         )
         self.assertEqual(admin_user.username, "adminuser")
         self.assertEqual(admin_user.email, "adminuser@mail.com")

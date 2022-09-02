@@ -5,6 +5,7 @@ from django.shortcuts import render
 
 from .models import Score
 
+
 def HomePage(request):
     context = {}
     today = date.today()
@@ -14,12 +15,12 @@ def HomePage(request):
     context['end_date'] = end_date
 
     score_list = Score.objects.filter(edited_at__range=[start_date, end_date])
-    
+
     paginator = Paginator(score_list, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context['page_obj'] = page_obj
-    
+
     recently_results = score_list.order_by('-edited_at')[:5]
     context['recently_results'] = recently_results
 
@@ -36,7 +37,7 @@ def HomePage(request):
             user_score = score_list.filter(author__username=request.user)[0]
             user_position = score_list.filter(
                 points__gt=user_score.points).count() + 1
-        except:
+        except IndexError:
             pass
         if user_score:
             context['user_score'] = user_score
