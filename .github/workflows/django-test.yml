@@ -36,6 +36,7 @@ jobs:
 
     - name: Create local settings
       run: |
+        cd backend
         # Ensure database port is dynamic
         echo "DATABASE_URL='postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/unicodex'" > .env
         # Enter some useful defaults for other environment variables
@@ -44,4 +45,6 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: Run tests
-      run: python manage.py test 
+      run: 
+       cd backend
+       python manage.py test 
