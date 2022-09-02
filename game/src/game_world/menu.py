@@ -36,19 +36,21 @@ class Menu:
         self.network = Network()
         self.connection_successful = False
 
-        coordiantes = [WIDTH / 4, HEIGHT / 3]
+        coordiantes = [WIDTH / 4, HEIGHT / 2]
 
         # Interactive elements
         self.password = Input(coordiantes, True)
         coordiantes[1] -= 75
         self.email = Input(coordiantes)
-        self.button = Button("Log In", 150, 32, (WIDTH/2, coordiantes[1] + 150))
-        coordiantes[1] -= 25
+        self.button = Button(
+            "Log In", 150, 32, (WIDTH/2, coordiantes[1] + 150))
+        coordiantes[1] -= 50
 
         # Labels
-        self.login_label = TextLabel("Witamy Samuraju", 48, coordiantes)
+        self.error_label = TextLabel("", 22, (50, coordiantes[1]))
         coordiantes[1] -= 50
-        self.error_label = TextLabel("", 32, coordiantes)
+        self.login_label = TextLabel(
+            "Witamy Samuraju", 48, (60, coordiantes[1]))
 
     def catch_events(self, event):
         """Catching events
