@@ -4,8 +4,11 @@ from ..models import Score
 
 
 class ScoreSerializer(serializers.ModelSerializer):
-    author = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
-    
+    author = serializers.PrimaryKeyRelatedField(
+        read_only=True,
+        default=serializers.CurrentUserDefault()
+    )
+
     class Meta:
         fields = (
             'id',
@@ -14,10 +17,10 @@ class ScoreSerializer(serializers.ModelSerializer):
             'edited_at',
         )
         model = Score
-        
+
     def create(self, validated_data):
         user = self.context['request'].user
-        
+
         if Score.objects.filter(author__username=user).exists():
             score = Score.objects.filter(author=user).first()
             if validated_data['points'] <= score.points:
@@ -27,4 +30,3 @@ class ScoreSerializer(serializers.ModelSerializer):
             score.save()
             return score
         return Score.objects.create(author=user, points=validated_data['points'])
-        
