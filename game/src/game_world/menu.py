@@ -58,7 +58,7 @@ class Menu:
         Check all actor interaction with objects.
 
         Arguments:
-            event, Event, Pygame event.
+            event, Event, Pygame event.`
         """
         self.email.catch_events(event)
         self.password.catch_events(event)

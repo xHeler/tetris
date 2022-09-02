@@ -5,6 +5,8 @@ Interactive filed, when active catch pressed keys.
 """
 import pygame
 
+from src.utils.settings import WIDTH
+
 
 class Input:
     """Input class
@@ -37,11 +39,14 @@ class Input:
 
         # create rectangle
         self.input_rect = pygame.Rect(
-            coordinates[0], coordinates[1], coordinates[0] * 2, 24)
+            coordinates[0], coordinates[1], coordinates[0] * 2.7, 24)
+        self.input_rect.center = (WIDTH/2, coordinates[1])
         self.border_rect = pygame.Rect(
             coordinates[0] - border/2, coordinates[1] - border/2,
-            coordinates[0] * 2 + border, 24 + border
+            coordinates[0] * 2.7 + border, 24 + border
         )
+
+        self.border_rect.center = (WIDTH/2, coordinates[1] - border/2 + 3)
 
     def catch_events(self, event):
         """Catch events
@@ -57,7 +62,7 @@ class Input:
         if event.type == pygame.KEYDOWN and self.active:
             if event.key == pygame.K_BACKSPACE:
                 self.user_text = self.user_text[:-1]
-            else:
+            elif len(self.user_text) < 31:
                 self.user_text += event.unicode
 
     def update(self):
