@@ -5,7 +5,6 @@ build:
   docker:
     web:
       dockerfile: backend/Dockerfile
-      context: .
 release:
   image: web
   command:
