@@ -6,6 +6,8 @@ Tool to prepare and display text label on screen.
 
 import pygame
 
+from src.utils.settings import FONT_PATH
+
 
 class TextLabel:
     """Text Label Class
@@ -29,7 +31,7 @@ class TextLabel:
         self.color = (255, 255, 255)
         self.center = (center)
 
-        self.font = pygame.font.Font(None, font_size)
+        self.font = pygame.font.Font(FONT_PATH, font_size)
         self.change_text(text)
         self.surface.get_rect().center = self.center
 

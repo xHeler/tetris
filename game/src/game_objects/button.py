@@ -5,6 +5,8 @@ Interactive rectangle working like button.
 """
 import pygame
 
+from src.utils.settings import FONT_PATH
+
 
 class Button:
     """Button class
@@ -33,15 +35,15 @@ class Button:
             text_color: Color, Text label color.
             text_surface: Surface, Object which will be displayed.
         """
-        self.font = pygame.font.Font(None, 32)
+        self.font = pygame.font.Font(FONT_PATH, 22)
 
         # create rectangle
         self.input_rect = pygame.Rect(0, 0, width, height)
         self.input_rect.center = center
 
         # colors
-        self.background_color = pygame.Color('white')
-        text_color = pygame.Color('black')
+        self.background_color = pygame.Color(48, 39, 42)
+        text_color = pygame.Color('white')
 
         self.text_surface = self.font.render(text, True, text_color)
 

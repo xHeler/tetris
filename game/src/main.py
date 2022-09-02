@@ -52,7 +52,7 @@ class Game:
         """
         while True:
             self.catch_events()
-            self.screen.fill('black')
+            self.screen.fill(pygame.Color(24, 89, 117))
             # Navigation
             if self.menu.connection_successful:
                 self.level.update()

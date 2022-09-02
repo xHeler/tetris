@@ -47,10 +47,10 @@ class Menu:
         coordiantes[1] -= 50
 
         # Labels
-        self.error_label = TextLabel("", 22, (50, coordiantes[1]))
+        self.error_label = TextLabel("", 6, (50, coordiantes[1]))
         coordiantes[1] -= 50
         self.login_label = TextLabel(
-            "Witamy Samuraju", 48, (60, coordiantes[1]))
+            "Witamy Samuraju", 36, (45, coordiantes[1]))
 
     def catch_events(self, event):
         """Catching events
