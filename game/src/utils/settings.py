@@ -41,5 +41,5 @@ MAP = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
 
 
 # Networking
-LOGIN_URL = 'http://127.0.0.1:8000/api/v1/dj-rest-auth/login/'
-CONN_URL = 'http://127.0.0.1:8000/api/v1/'
+LOGIN_URL = 'https://desolate-basin-99300.herokuapp.com/api/v1/dj-rest-auth/login/'
+CONN_URL = 'https://desolate-basin-99300.herokuapp.com/api/v1/'
