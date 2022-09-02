@@ -82,6 +82,8 @@ REST_FRAMEWORK = {
 SECURE_SSL_REDIRECT = False
 ROOT_URLCONF = 'base.urls'
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -152,13 +154,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
-MEDIA_ROOT = BASE_DIR / 'staticfiles/images'
-
-print(BASE_DIR)
-print(STATIC_ROOT)
-print(MEDIA_ROOT)
-
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+MEDIA_ROOT = BASE_DIR / 'static/images'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
