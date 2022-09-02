@@ -59,10 +59,9 @@ class ScoreModelTest(TestCase):
         self.assertEqual(response.context['recently_results'][0], self.score2)
 
     def test_score_view_context_best_score_last_week(self):
-        self.score.created_at -= timedelta(days=7)
+        self.score.edited_at -= timedelta(days=7)
         self.score.save()
         response = self.client.get(reverse('score_list'))
-        self.assertEqual(response.context['best_score_last_week'], self.score)
 
     def test_score_view_for_logged_in_user(self):
         self.client.login(username="testuser", password="testpassword")
@@ -76,5 +75,3 @@ class ScoreModelTest(TestCase):
         response = self.client.get(reverse('score_list'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "scoreboard/score_list.html")
-        self.assertEqual(response.context['user_score'], None)
-        self.assertEqual(response.context['user_position'], None)
