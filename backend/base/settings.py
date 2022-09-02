@@ -152,7 +152,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
-MEDIA_ROOT = '/backend' / BASE_DIR / 'static/images'
+MEDIA_ROOT = BASE_DIR / 'staticfiles/images'
+
 print(BASE_DIR)
 print(STATIC_ROOT)
 print(MEDIA_ROOT)
