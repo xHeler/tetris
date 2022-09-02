@@ -1,10 +1,7 @@
 name: Django-Deploy
 
-on:
-  push:
-    branches: [ deploy ]
-  pull_request:
-    branches: [ deploy ]
+on: [push]
+
 jobs:
   heroku_git_deploy_job:
       runs-on: ubuntu-latest
