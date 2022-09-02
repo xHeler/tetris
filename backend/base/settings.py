@@ -152,7 +152,10 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
-MEDIA_ROOT = BASE_DIR / 'staticfiles/images'
+MEDIA_ROOT = '/backend' / BASE_DIR / 'static/images'
+print(BASE_DIR)
+print(STATIC_ROOT)
+print(MEDIA_ROOT)
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
