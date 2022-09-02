@@ -148,7 +148,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
-MEDIA_URL = '/images/'
+MEDIA_URL = 'static/images/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
