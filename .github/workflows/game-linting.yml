@@ -1,4 +1,4 @@
-name: Pylint
+name: Game-Linting
 
 on: [push]
 
