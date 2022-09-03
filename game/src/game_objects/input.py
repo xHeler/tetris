@@ -5,7 +5,7 @@ Interactive filed, when active catch pressed keys.
 """
 import pygame
 
-from src.utils.settings import WIDTH, FONT_PATH
+from src.utils.settings import WIDTH
 
 
 class Input:
@@ -31,7 +31,7 @@ class Input:
             color: color, Input color.
             input_rect: Rect, Object which will be displayed.
         """
-        self.font = pygame.font.Font(FONT_PATH, 24)
+        self.font = pygame.font.Font(None, 19)
         self.password_field = password_field
         self.user_text = ''
         self.active = False
@@ -39,7 +39,7 @@ class Input:
 
         # create rectangle
         self.input_rect = pygame.Rect(
-            coordinates[0], coordinates[1], coordinates[0] * 2.7, 24)
+            coordinates[0], coordinates[1], coordinates[0] * 2.7, 26)
         self.input_rect.center = (WIDTH/2, coordinates[1])
         self.border_rect = pygame.Rect(
             coordinates[0] - border/2, coordinates[1] - border/2,
@@ -62,7 +62,7 @@ class Input:
         if event.type == pygame.KEYDOWN and self.active:
             if event.key == pygame.K_BACKSPACE:
                 self.user_text = self.user_text[:-1]
-            elif len(self.user_text) < 31:
+            elif len(self.user_text) < 30:
                 self.user_text += event.unicode
 
     def update(self):
@@ -85,4 +85,4 @@ class Input:
         pygame.draw.rect(display_surface, self.color, self.input_rect)
 
         display_surface.blit(
-            text_surface, (self.input_rect.x + 2, self.input_rect.y + 5))
+            text_surface, (self.input_rect.x + 2, self.input_rect.y + 6))
