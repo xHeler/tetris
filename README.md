@@ -22,7 +22,7 @@
 
 ***
 ### Mobile:
-<img style="width: 183px" src="img/mobile2.jpg"> <img style="width: 183px" src="img/mobile1.jpg"> <img style="width: 183px" src="img/mobile3.jpg">
+<img src="img/mobile.png">
 
 # Project Structure
 
