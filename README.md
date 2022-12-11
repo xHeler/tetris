@@ -1,4 +1,4 @@
-# <img style="width: 35px" src="https://desolate-basin-99300.herokuapp.com/static/images/logo.png"> Tetris Project
+# Tetris Project
 Tetris' game and live online scoreboard.
 ***
 
